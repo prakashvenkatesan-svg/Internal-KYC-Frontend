@@ -63,10 +63,12 @@ const Scheme = () => {
       setIsSavingScheme(true);
       setSchemeError("");
 
-      await api.post("/scheme/save", {
-        application_id: Number(applicationId),
-        selectedScheme,
-      });
+      if (selectedScheme !== "testScheme") {
+        await api.post("/scheme/save", {
+          application_id: Number(applicationId),
+          selectedScheme,
+        });
+      }
 
       localStorage.setItem("selected_scheme", selectedScheme);
       localStorage.setItem("scheme_selections", JSON.stringify(schemeSelections));
@@ -170,7 +172,7 @@ const Scheme = () => {
 <p>Test Scheme</p>
 
                 <h2 className='scheme-price'>
-                  ₹ 1 <span>+ GST</span>
+                  ₹ 1
                 </h2>
 
                 <p className='scheme-amc-text'>

@@ -12,7 +12,7 @@ const PaymentSummary = () => {
   );
 
   const accountOpeningCharges = savedSchemeSelections.testScheme ? 1 : savedSchemeSelections.annualCare ? 1249 : 2499;
-  const taxAmount = (accountOpeningCharges * 18) / 100;
+  const taxAmount = savedSchemeSelections.testScheme ? 0 : (accountOpeningCharges * 18) / 100;
   // const ddpiAmount = ddpi === "Yes" ? 150 : 0;
 
   const total = accountOpeningCharges + taxAmount;
