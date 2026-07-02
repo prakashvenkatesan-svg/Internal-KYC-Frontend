@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import api from "../../../services/api";
 
 import paymentImg from "../../../assets/paymentimg.png";
 
@@ -11,8 +11,8 @@ const PaymentSummary = () => {
     localStorage.getItem("scheme_selections") || "{}",
   );
 
-  const accountOpeningCharges = savedSchemeSelections.testScheme ? 1 : savedSchemeSelections.annualCare ? 1249 : 2499;
-  const taxAmount = savedSchemeSelections.testScheme ? 0 : (accountOpeningCharges * 18) / 100;
+  const accountOpeningCharges = savedSchemeSelections.annualCare ? 1249 : 2499;
+  const taxAmount = (accountOpeningCharges * 18) / 100;
   // const ddpiAmount = ddpi === "Yes" ? 150 : 0;
 
   const total = accountOpeningCharges + taxAmount;
@@ -29,11 +29,10 @@ const PaymentSummary = () => {
       const userName = userEmail.split("@")[0] || "Client";
 
       // BACKEND API
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL || "https://57yp657i65.execute-api.ap-south-1.amazonaws.com/staging/api"}/payment/generate-hash`,
+      const response = await api.post(
+        "/payment/generate-hash",
         {
           application_id: Number(applicationId),
-
           txnid,
           amount: total.toFixed(2),
           firstname: userName,
@@ -46,12 +45,13 @@ const PaymentSummary = () => {
       const data = response.data;
 
       // CREATE FORM
+    
       const form = document.createElement("form");
 
       form.method = "POST";
 
       // PAYU TEST URL
-      form.action = "https://secure.payu.in/_payment";
+      form.action = "https://test.payu.in/_payment";
 
       // PAYU FIELDS
       const fields = {

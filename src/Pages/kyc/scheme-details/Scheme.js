@@ -29,7 +29,6 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: schemeValue === "lifeTime",
       annualCare: schemeValue === "annualCare",
-      testScheme: schemeValue === "testScheme",
     };
 
     localStorage.setItem("selected_scheme", schemeValue);
@@ -56,19 +55,16 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: selectedScheme === "lifeTime",
       annualCare: selectedScheme === "annualCare",
-      testScheme: selectedScheme === "testScheme",
     };
 
     try {
       setIsSavingScheme(true);
       setSchemeError("");
 
-      if (selectedScheme !== "testScheme") {
-        await api.post("/scheme/save", {
-          application_id: Number(applicationId),
-          selectedScheme,
-        });
-      }
+      await api.post("/scheme/save", {
+        application_id: Number(applicationId),
+        selectedScheme,
+      });
 
       localStorage.setItem("selected_scheme", selectedScheme);
       localStorage.setItem("scheme_selections", JSON.stringify(schemeSelections));
@@ -152,36 +148,6 @@ const Scheme = () => {
                 </p>
 
                 {selectedScheme === "annualCare" && (
-                  <span className='scheme-selected-check'>✓</span>
-                )}
-              </button>
-
-              {/* Scheme 3 */}
-              <button
-                type='button'
-                className={`scheme-price-box scheme-three ${
-                  selectedScheme === "testScheme" ? "scheme-active" : ""
-                }`}
-                role='radio'
-                aria-checked={selectedScheme === "testScheme"}
-                onClick={() => handleSchemeSelect("testScheme")}
-              >
-                <span className='scheme-number'>3</span>
-
-                <p className='scheme-label'>Scheme</p>
-<p>Test Scheme</p>
-
-                <h2 className='scheme-price'>
-                  ₹ 1
-                </h2>
-
-                <p className='scheme-amc-text'>
-                  (For Testing)
-                  <br />
-                  Will be removed
-                </p>
-
-                {selectedScheme === "testScheme" && (
                   <span className='scheme-selected-check'>✓</span>
                 )}
               </button>
