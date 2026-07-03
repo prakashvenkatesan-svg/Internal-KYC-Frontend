@@ -5722,33 +5722,3 @@ th {
     font-size: 22px;
   }
 }
-/* Default Scheme 3 - White card with green outline */
-.scheme-three {
-  color: #00b894;
-  border: 1.5px solid #a8e6cf;
-}
-
-/* Selected Scheme 3 */
-.scheme-three.scheme-active {
-  color: #ffffff;
-  border-color: #00b894;
-  background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-  box-shadow: 0 8px 18px rgba(0, 184, 148, 0.28);
-  transform: translateY(-2px);
-}
-
-.scheme-three.scheme-active h2 {
-  color: #ffffff;
-}
-
-/* Default number colors */
-.scheme-three .scheme-number {
-  color: #ffffff;
-  background: #00b894;
-}
-
-/* Active number colors */
-.scheme-three.scheme-active .scheme-number {
-  color: #00b894;
-  background: #ffffff;
-}
