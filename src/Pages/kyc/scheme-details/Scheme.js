@@ -63,9 +63,11 @@ const Scheme = () => {
       setIsSavingScheme(true);
       setSchemeError("");
 
+      const backendScheme = selectedScheme === "testingScheme" ? "annualCare" : selectedScheme;
+
       await api.post("/scheme/save", {
         application_id: Number(applicationId),
-        selectedScheme,
+        selectedScheme: backendScheme,
       });
 
       localStorage.setItem("selected_scheme", selectedScheme);
