@@ -29,6 +29,7 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: schemeValue === "lifeTime",
       annualCare: schemeValue === "annualCare",
+      testingScheme: schemeValue === "testingScheme",
     };
 
     localStorage.setItem("selected_scheme", schemeValue);
@@ -55,6 +56,7 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: selectedScheme === "lifeTime",
       annualCare: selectedScheme === "annualCare",
+      testingScheme: selectedScheme === "testingScheme",
     };
 
     try {
@@ -148,6 +150,36 @@ const Scheme = () => {
                 </p>
 
                 {selectedScheme === "annualCare" && (
+                  <span className='scheme-selected-check'>✓</span>
+                )}
+              </button>
+
+              {/* Scheme 3 */}
+              <button
+                type='button'
+                className={`scheme-price-box scheme-three ${
+                  selectedScheme === "testingScheme" ? "scheme-active" : ""
+                }`}
+                role='radio'
+                aria-checked={selectedScheme === "testingScheme"}
+                onClick={() => handleSchemeSelect("testingScheme")}
+              >
+                <span className='scheme-number'>3</span>
+
+                <p className='scheme-label'>Scheme</p>
+<p>Testing Purpose</p>
+
+                <h2 className='scheme-price'>
+                  ₹ 1 <span>+ GST</span>
+                </h2>
+
+                <p className='scheme-amc-text'>
+                  (For testing)
+                  <br />
+                  &nbsp;
+                </p>
+
+                {selectedScheme === "testingScheme" && (
                   <span className='scheme-selected-check'>✓</span>
                 )}
               </button>
