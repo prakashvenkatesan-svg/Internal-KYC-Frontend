@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
 import LoginForm from "./Components/LoginForm";
+import TradingLoginRedirect from "./Components/TradingLoginRedirect";
 
 //PAGES
 import Home from "./Pages/Home";
@@ -67,6 +68,9 @@ import SignatureVerification from "./Pages/kyc/kyc-verification/SignatureVerific
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Chatbot from "./Components/chatbot/Chatbot";
+
+
 const Layout = () => {
   const location = useLocation();
 
@@ -83,6 +87,7 @@ const Layout = () => {
 
   const hideFooter =
     location.pathname === "/login" ||
+    location.pathname === "/trading-login" ||
     location.pathname === "/accountcloser" ||
     location.pathname === "/rekycpage" ||
     location.pathname === "/numberregistration" ||
@@ -122,6 +127,7 @@ const Layout = () => {
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/More' element={<More />} />
         <Route path='/login' element={<LoginForm />} />
+        <Route path='/trading-login' element={<TradingLoginRedirect />} />
         <Route path='/openaccount' element={<Openaccount />} />
         <Route path='/accountcloser' element={<Accountcloserform />} />
         <Route path='/rekycpage' element={<Rekycform />} />
@@ -203,7 +209,7 @@ const Layout = () => {
           }
         />
       </Routes>
-
+    <Chatbot />
       {!hideFooter && <Footer />}
       <ToastContainer position='top-right' autoClose={2500} />
     </>

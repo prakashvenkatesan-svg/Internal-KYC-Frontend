@@ -1060,6 +1060,7 @@ const parseDisplayDob = (value) => {
                             <option value='Brother'>Brother</option>
                             <option value='Sister'>Sister</option>
                             <option value='Spouse'>Spouse</option>
+                            <option value='Wife'>Wife</option>
                             <option value='Son'>Son</option>
                             <option value='Daughter'>Daughter</option>
                             <option value='Other'>Other</option>

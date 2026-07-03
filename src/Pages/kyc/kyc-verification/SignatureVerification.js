@@ -517,63 +517,19 @@ const SignatureVerification = () => {
               type='button'
               className='submit-btn'
               style={{
-                marginTop: "16px",
-                background: "#fff",
-                color: "#264095",
-                border: "1px solid #264095",
-              }}
-              onClick={previewPdf}
-              disabled={
-                pdfLoading || loading || statusLoading || !applicationId
-              }
-            >
-              {pdfLoading ? "Preparing PDF..." : "Refresh PDF Preview"}
-            </button>
-
-            <button
-              type='button'
-              className='submit-btn'
-              style={{
-                marginTop: "16px",
-                background: "#fff",
-                color: "#264095",
-                border: "1px solid #264095",
-              }}
-              onClick={downloadPdf}
-              disabled={
-                pdfLoading || loading || statusLoading || !applicationId
-              }
-            >
-              {pdfLoading ? "Preparing PDF..." : "Download PDF"}
-            </button>
-
-            <button
-              type='button'
-              className='submit-btn'
-              style={{
-                marginTop: "16px",
+                marginTop: "35px",
+                width: "auto",
+                minWidth: "320px",
+                maxWidth: "480px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                paddingLeft: "32px",
+                paddingRight: "32px",
               }}
               onClick={handleStartEsign}
               disabled={loading || statusLoading || pdfLoading}
             >
               {loading ? "Preparing eSign..." : "Confirm and Proceed to eSign"}
-            </button>
-
-            <button
-              type='button'
-              className='submit-btn'
-              style={{
-                marginTop: "16px",
-                background: "#fff",
-                color: "#264095",
-                border: "1px solid #264095",
-              }}
-              onClick={handleCheckStatus}
-              disabled={
-                loading || statusLoading || pdfLoading || !applicationId
-              }
-            >
-              {statusLoading ? "Checking Status..." : "Check Status"}
             </button>
           </>
         ) : null}
@@ -640,21 +596,6 @@ const SignatureVerification = () => {
             </button>
           </>
         ) : null}
-
-        <button
-          type='button'
-          className='submit-btn'
-          style={{
-            marginTop: "16px",
-            background: "#fff",
-            color: "#264095",
-            border: "1px solid #264095",
-          }}
-          onClick={() => navigate("/photoverify")}
-          disabled={loading || statusLoading || pdfLoading}
-        >
-          Back
-        </button>
       </div>
     </div>
   );

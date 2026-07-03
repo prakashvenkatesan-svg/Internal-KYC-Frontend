@@ -35,7 +35,7 @@ const Emailotp = () => {
     const finalApplicationId = stateApplicationId || savedApplicationId || "";
 
     if (!finalEmail || !finalApplicationId) {
-      navigate("/emailregistration");
+      navigate("/emailverify");
       return;
     }
 
@@ -151,7 +151,7 @@ const Emailotp = () => {
               <span className='otp-mobile-number'>{email}</span>
               <FaEdit
                 className='edit-icon'
-                onClick={() => navigate("/emailregistration")}
+                onClick={() => navigate("/emailverify")}
                 style={{ cursor: "pointer", marginLeft: "8px" }}
               />
             </div>

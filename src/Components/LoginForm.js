@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 import "../Style.css";
@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" }); // clear error
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const validate = () => {
@@ -62,6 +62,17 @@ const LoginForm = () => {
         {errors.password && <span className='error'>{errors.password}</span>}
 
         <button type='submit'>Login</button>
+        <button
+          type='button'
+          className='trading-login-button'
+          onClick={() => navigate("/trading-login")}
+        >
+          Trading Login
+        </button>
+
+        <p className='trading-login-helper'>
+          Use Trading Login to continue to the Tradeplus platform.
+        </p>
 
         <p className='register-link'>
           Don’t have an account?

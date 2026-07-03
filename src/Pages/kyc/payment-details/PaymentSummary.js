@@ -11,11 +11,7 @@ const PaymentSummary = () => {
     localStorage.getItem("scheme_selections") || "{}",
   );
 
-  const accountOpeningCharges = savedSchemeSelections.testingScheme
-    ? 1
-    : savedSchemeSelections.annualCare
-    ? 1249
-    : 2499;
+  const accountOpeningCharges = savedSchemeSelections.annualCare ? 1249 : 2499;
   const taxAmount = (accountOpeningCharges * 18) / 100;
   // const ddpiAmount = ddpi === "Yes" ? 150 : 0;
 
@@ -54,8 +50,8 @@ const PaymentSummary = () => {
 
       form.method = "POST";
 
-      // PAYU LIVE URL
-      form.action = "https://secure.payu.in/_payment";
+      // PAYU TEST URL
+      form.action = "https://test.payu.in/_payment";
 
       // PAYU FIELDS
       const fields = {

@@ -658,6 +658,54 @@ h2 {
   background: #1d4ed8;
 }
 
+.trading-login-button {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #2563eb;
+  background: #ffffff;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.trading-login-button:hover {
+  background: #eff6ff;
+}
+
+.trading-login-helper {
+  margin: -4px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.trading-login-container {
+  text-align: center;
+}
+
+.trading-login-copy {
+  margin-bottom: 20px;
+  color: #475569;
+}
+
+.trading-login-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.trading-login-link:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
 .register-link {
   text-align: center;
   font-size: 14px;
@@ -5721,34 +5769,4 @@ th {
   .branch-heading {
     font-size: 22px;
   }
-}
-/* Default Scheme 3 - White card with green outline */
-.scheme-three {
-  color: #00b894;
-  border: 1.5px solid #a8e6cf;
-}
-
-/* Selected Scheme 3 */
-.scheme-three.scheme-active {
-  color: #ffffff;
-  border-color: #00b894;
-  background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-  box-shadow: 0 8px 18px rgba(0, 184, 148, 0.28);
-  transform: translateY(-2px);
-}
-
-.scheme-three.scheme-active h2 {
-  color: #ffffff;
-}
-
-/* Default number colors */
-.scheme-three .scheme-number {
-  color: #ffffff;
-  background: #00b894;
-}
-
-/* Active number colors */
-.scheme-three.scheme-active .scheme-number {
-  color: #00b894;
-  background: #ffffff;
 }
