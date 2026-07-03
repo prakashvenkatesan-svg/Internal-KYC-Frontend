@@ -28,7 +28,7 @@ const PhotoVerification = () => {
   };
   useEffect(() => {
   const loadModels = async () => {
-    await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+    await faceapi.nets.tinyFaceDetector.loadFromUri("/models-v2");
   };
 
   loadModels();
