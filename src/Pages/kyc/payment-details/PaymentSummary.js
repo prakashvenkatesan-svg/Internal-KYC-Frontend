@@ -11,7 +11,11 @@ const PaymentSummary = () => {
     localStorage.getItem("scheme_selections") || "{}",
   );
 
-  const accountOpeningCharges = savedSchemeSelections.annualCare ? 1249 : 2499;
+  const accountOpeningCharges = savedSchemeSelections.testingScheme
+    ? 1
+    : savedSchemeSelections.annualCare
+    ? 1249
+    : 2499;
   const taxAmount = (accountOpeningCharges * 18) / 100;
   // const ddpiAmount = ddpi === "Yes" ? 150 : 0;
 
