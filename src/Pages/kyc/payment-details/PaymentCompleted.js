@@ -29,7 +29,7 @@ const PaymentCompleted = () => {
 
         <h3 className='text-center'>Congratulations</h3>
 
-        <p className='text-center'>You have successfully created account</p>
+        <p className='text-center'>You have successfully completed payment</p>
         <button
           type='button'
           className='submit-btn'
