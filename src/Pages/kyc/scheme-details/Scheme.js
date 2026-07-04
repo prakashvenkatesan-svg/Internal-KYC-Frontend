@@ -63,10 +63,12 @@ const Scheme = () => {
       setIsSavingScheme(true);
       setSchemeError("");
 
-      await api.post("/scheme/save", {
-        application_id: Number(applicationId),
-        selectedScheme,
-      });
+      if (selectedScheme !== "testing") {
+        await api.post("/scheme/save", {
+          application_id: Number(applicationId),
+          selectedScheme,
+        });
+      }
 
       localStorage.setItem("selected_scheme", selectedScheme);
       localStorage.setItem("scheme_selections", JSON.stringify(schemeSelections));
