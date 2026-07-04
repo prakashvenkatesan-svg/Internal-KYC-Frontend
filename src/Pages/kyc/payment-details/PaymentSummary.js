@@ -54,8 +54,8 @@ const PaymentSummary = () => {
 
       form.method = "POST";
 
-      // PAYU TEST URL
-      form.action = "https://test.payu.in/_payment";
+      // PAYU LIVE URL
+      form.action = "https://secure.payu.in/_payment";
 
       // PAYU FIELDS
       const fields = {
