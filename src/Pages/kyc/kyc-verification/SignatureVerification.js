@@ -276,8 +276,22 @@ const SignatureVerification = () => {
         return;
       }
 
+      let lat = "";
+      let lng = "";
+
+      try {
+        const pos = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 });
+        });
+        lat = pos.coords.latitude;
+        lng = pos.coords.longitude;
+      } catch (geoError) {
+        console.warn("Geolocation not captured:", geoError);
+      }
+
       const response = await api.post(
         `/esign/applications/${applicationId}/start`,
+        { lat, lng }
       );
       const signerUrl =
         response.data?.data?.signer_url ||
