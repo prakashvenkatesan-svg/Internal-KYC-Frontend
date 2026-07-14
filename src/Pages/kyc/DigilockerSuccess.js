@@ -35,8 +35,10 @@ const DigilockerSuccess = () => {
           clearInterval(interval);
 
           // FETCH AADHAAR
+          // CVL KRA: pass application_id so backend can upload Aadhaar XML to S3
+          const applicationId = localStorage.getItem("application_id");
           const aadhaarResponse = await api.get(
-            `/digilocker/aadhaar/${id}`
+            `/digilocker/aadhaar/${id}${applicationId ? `?application_id=${applicationId}` : ``}`
           );
 
           const aadhaarData =

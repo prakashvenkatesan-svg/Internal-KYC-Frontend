@@ -125,7 +125,7 @@ const Nonomination = () => {
         <button
           type='submit'
           className='btn btn-primary'
-          onClick={() => navigate("/schemedetail")}
+          onClick={() => navigate("/photoverify")}
         >
           Submit
         </button>
