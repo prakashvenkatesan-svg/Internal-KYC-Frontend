@@ -777,8 +777,8 @@ const PersonalDetails = () => {
                       <option value='' disabled hidden>
                         Select Running Account Authorization
                       </option>
-                      <option value='Yes'>Yes</option>
-                      <option value='No'>No</option>
+                      <option value='Monthly'>Monthly</option>
+                      <option value='Quarterly'>Quarterly</option>
                     </select>
                     <label>
                       Running Account Authorization <span>*</span>
