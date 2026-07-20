@@ -29,7 +29,6 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: schemeValue === "lifeTime",
       annualCare: schemeValue === "annualCare",
-      testing: schemeValue === "testing",
     };
 
     localStorage.setItem("selected_scheme", schemeValue);
@@ -56,19 +55,16 @@ const Scheme = () => {
     const schemeSelections = {
       lifeTime: selectedScheme === "lifeTime",
       annualCare: selectedScheme === "annualCare",
-      testing: selectedScheme === "testing",
     };
 
     try {
       setIsSavingScheme(true);
       setSchemeError("");
 
-      if (selectedScheme !== "testing") {
-        await api.post("/scheme/save", {
-          application_id: Number(applicationId),
-          selectedScheme,
-        });
-      }
+      await api.post("/scheme/save", {
+        application_id: Number(applicationId),
+        selectedScheme,
+      });
 
       localStorage.setItem("selected_scheme", selectedScheme);
       localStorage.setItem("scheme_selections", JSON.stringify(schemeSelections));
@@ -156,33 +152,7 @@ const Scheme = () => {
                 )}
               </button>
 
-              {/* Scheme 3 */}
-              <button
-                type='button'
-                className={`scheme-price-box scheme-three ${
-                  selectedScheme === "testing" ? "scheme-active" : ""
-                }`}
-                role='radio'
-                aria-checked={selectedScheme === "testing"}
-                onClick={() => handleSchemeSelect("testing")}
-              >
-                <span className='scheme-number'>3</span>
 
-                <p className='scheme-label'>Scheme</p>
-                <p>Testing</p>
-
-                <h2 className='scheme-price'>
-                  ₹ 1 <span>+ GST</span>
-                </h2>
-
-                <p className='scheme-amc-text'>
-                  (For testing)
-                </p>
-
-                {selectedScheme === "testing" && (
-                  <span className='scheme-selected-check'>✓</span>
-                )}
-              </button>
             </div>
 
             <div className='scheme-info-actions'>
