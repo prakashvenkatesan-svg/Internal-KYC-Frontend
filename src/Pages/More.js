@@ -26,9 +26,8 @@ const More = () => {
         <div>
           <button
             type='button'
-            className={`more-btn ${
-              activeSection === "Awareness and Advisory" ? "active" : ""
-            }`}
+            className={`more-btn ${activeSection === "Awareness and Advisory" ? "active" : ""
+              }`}
             onClick={() => setActiveSection("Awareness and Advisory")}
           >
             Investor Awareness and Advisory
@@ -113,27 +112,27 @@ const More = () => {
               These norms are available on Exchange website at
             </p>
             <p>following link:</p>
-           <p className="more-link-item">
-  <a
-    href="https://www.nseindia.com/invest/about-defaulter-section"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="more-text"
-  >
-    www.nseindia.com/invest/about-defaulter-section
-  </a>
-</p>
+            <p className="more-link-item">
+              <a
+                href="https://www.nseindia.com/invest/about-defaulter-section"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="more-text"
+              >
+                www.nseindia.com/invest/about-defaulter-section
+              </a>
+            </p>
 
-<p className="more-link-item">
-  <a
-    href="https://www.bseindia.com/static/investors/Claim%20Against%20Defaulter"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="more-text"
-  >
-    www.bseindia.com/static/investors/Claim Against Defaulter
-  </a>
-</p>
+            <p className="more-link-item">
+              <a
+                href="https://www.bseindia.com/static/investors/Claim%20Against%20Defaulter"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="more-text"
+              >
+                www.bseindia.com/static/investors/Claim Against Defaulter
+              </a>
+            </p>
             <p>
               Brokers are not permitted to accept transfer of securities as
               margin. Securitiesoffered as margin/ collateral MUST remain in the
@@ -313,7 +312,7 @@ const More = () => {
                   <td data-label='IFSC Code'>HDFC0000060</td>
                   <td data-label='Branch Name'>HDFC Bank Ltd, Fort Branch</td>
                   <td data-label='Mode of Transfer'>NEFT Only</td>
-                 <td data-label='ICCL LEI Number'>-</td>
+                  <td data-label='ICCL LEI Number'>-</td>
 
                 </tr>
               </tbody>
@@ -341,7 +340,7 @@ const More = () => {
                   <td data-label='IFSC Code'>ICLL0000001</td>
                   <td data-label='Branch Name'>RBI Fort</td>
                   <td data-label='Mode of Transfer'>RTGS Only</td>
-                 <td data-label='ICCL LEI Number'>335800EV4FPEFRWNVX08</td>
+                  <td data-label='ICCL LEI Number'>335800EV4FPEFRWNVX08</td>
 
                 </tr>
               </tbody>
