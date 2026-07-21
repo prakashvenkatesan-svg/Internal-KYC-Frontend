@@ -363,8 +363,15 @@ const Footer = () => {
           </p>
           <p className='p-tag'>
             The comprehensive details of Depository Participants is displayed on
-            CDSL website at following link:
-            https://www.cdslindia.com/eservices/DP/DPDatabase
+            CDSL website at following link:{" "}
+            <a
+              href='https://www.cdslindia.com/eservices/DP/DPDatabase'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='footer-inline-link'
+            >
+              https://www.cdslindia.com/eservices/DP/DPDatabase
+            </a>
           </p>
           <h6 className='text-center'>
             Investments in securities market are subject to market risks, read

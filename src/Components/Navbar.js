@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import Aionionlogo from "../assets/Aionionlogo.png";
-import rekycLinks from "../utils/rekycLinks";
 import "../Style.css";
 
 const TRADING_LOGIN_URL = "http://tradeplus.aionioncapital.com/";
@@ -50,7 +49,7 @@ const Navbar = () => {
   return (
     <div className='Navbar'>
       <div className='container p-0'>
-        <nav className='navbar navbar-expand-xxl navbar-light custom-navbar'>
+        <nav className='navbar navbar-expand-xl navbar-light custom-navbar'>
           {showLogoOnly ? (
             <>
               <img
@@ -150,31 +149,6 @@ const Navbar = () => {
                     </NavLink>
                   </li>
 
-                  <li className='nav-item dropdown rekyc-nav-item'>
-                    <button
-                      type='button'
-                      className='nav-link dropdown-toggle rekyc-nav-toggle'
-                      data-bs-toggle='dropdown'
-                      aria-expanded='false'
-                    >
-                      ReKYC
-                    </button>
-                    <ul className='dropdown-menu rekyc-dropdown-menu'>
-                      {rekycLinks.map((item) => (
-                        <li key={item.label}>
-                          <a
-                            className='dropdown-item rekyc-dropdown-item'
-                            href={item.href}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            onClick={closeMenu}
-                          >
-                            {item.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
                 </ul>
 
                 <div className='navbar-button'>
@@ -186,7 +160,7 @@ const Navbar = () => {
                       closeMenu();
                     }}
                   >
-                    Register
+                    Open Account
                   </button>
 
                   <button

@@ -296,7 +296,7 @@ const Home = () => {
       <div className='Section-G'>
         <div className='container'>
           <h2 className='text-center'>38K+ User World Wide</h2>
-          <h3 className='text-center'>Investor Attention</h3>
+          <h3 className='text-center'>Feedback from Investors</h3>
 
           <div className='testimonial-section'>
             <FaQuoteLeft className='quote-icon' />

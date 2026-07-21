@@ -474,15 +474,17 @@ const Investor = () => {
               </p>
 
               <p>
-                3. You may also access the
+                3. You may also access the SMART Online Resolution of Dispute
+                Portal at{" "}
                 <a
                   href='https://smartodr.in/login'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  SMART Online Resolution of Dispute Portal
+                  https://smartodr.in/login
                 </a>
-                . For further information, you can review the
+                . For further information, you can review the SEBI ODR circular
+                at{" "}
                 <a
                   href='https://www.sebi.gov.in/legal/circulars/aug-2023/online-dispute-resolution-in-the-indian-securities-market_75345.html'
                   target='_blank'
@@ -641,7 +643,7 @@ const Investor = () => {
 
       <div className='investor-account' id='bank-details'>
         <div className='container'>
-          <h2 className='text-center'>Equity Account Details</h2>
+          <h2 className='text-center'>Bank Details</h2>
           <h3 className="bank-detail-title">
             Kindly ensure you strictly follow the instructions provided on the
             Trade app and website before proceeding with your fund transfer.

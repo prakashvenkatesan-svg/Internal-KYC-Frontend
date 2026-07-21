@@ -392,19 +392,20 @@ h2 {
 
 .navbar-nav {
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-left: auto;
 }
 
 /* menu text */
 .navbar-nav .nav-link {
   color: #000000;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 1px;
-  padding: 8px 10px;
+  padding: 8px 9px;
   text-transform: capitalize;
   transition: 0.3s ease;
+  white-space: nowrap;
 }
 
 /* active and hover color */
@@ -447,6 +448,7 @@ h2 {
   align-items: center;
   gap: 14px;
   margin-left: 35px;
+  white-space: nowrap;
 }
 
 /* Login gradient fill */
@@ -457,7 +459,7 @@ h2 {
 }
 
 .Registerbtn {
-  width: 105px;
+  min-width: 132px;
   height: 40px;
   border-radius: 100px;
   border: 2px solid transparent;
@@ -1045,6 +1047,18 @@ h2 {
   font-weight: 400;
 }
 
+.footer-inline-link {
+  color: #0023ff;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+}
+
+.footer-inline-link:hover,
+.footer-inline-link:focus {
+  color: #ff5f87;
+}
+
 .footer-social-link {
   display: inline-flex;
   align-items: center;
@@ -1401,6 +1415,14 @@ h2 {
 .aboutus {
   margin-top: 40px;
   padding-bottom: 40px;
+}
+
+.people-subtitle {
+  color: #1f2937;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: -8px auto 28px;
+  max-width: 820px;
 }
 
 .Aboutus-card {
@@ -5306,8 +5328,9 @@ th {
   }
 
   .navbar-button {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 18px;
   }
 
   .investor-step {
@@ -5404,10 +5427,10 @@ th {
 }
 
 /* =========================================================
-   MEDIUM DEVICES / TABLETS / NAVBAR
-   max-width 991px
+   COLLAPSED NAVBAR / TABLETS / SMALL LAPTOPS
+   max-width 1199.98px
 ========================================================= */
-@media (max-width: 991px) {
+@media (max-width: 1199.98px) {
   .navbar-collapse {
     width: 100%;
   }
@@ -5419,6 +5442,17 @@ th {
     margin-top: 10px;
   }
 
+  .navbar-button {
+    justify-content: center;
+    margin: 14px 0 18px;
+  }
+}
+
+/* =========================================================
+   MEDIUM DEVICES / TABLETS
+   max-width 991px
+========================================================= */
+@media (max-width: 991px) {
   .Section-A {
     height: auto;
   }
