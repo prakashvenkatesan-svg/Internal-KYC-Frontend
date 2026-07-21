@@ -4,7 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import Aionionlogo from "../assets/Aionionlogo.png";
+import rekycLinks from "../utils/rekycLinks";
 import "../Style.css";
+
+const TRADING_LOGIN_URL = "http://tradeplus.aionioncapital.com/";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -146,6 +149,32 @@ const Navbar = () => {
                       More
                     </NavLink>
                   </li>
+
+                  <li className='nav-item dropdown rekyc-nav-item'>
+                    <button
+                      type='button'
+                      className='nav-link dropdown-toggle rekyc-nav-toggle'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
+                      ReKYC
+                    </button>
+                    <ul className='dropdown-menu rekyc-dropdown-menu'>
+                      {rekycLinks.map((item) => (
+                        <li key={item.label}>
+                          <a
+                            className='dropdown-item rekyc-dropdown-item'
+                            href={item.href}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            onClick={closeMenu}
+                          >
+                            {item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
                 </ul>
 
                 <div className='navbar-button'>
@@ -164,8 +193,8 @@ const Navbar = () => {
                     type='button'
                     className='loginbtn'
                     onClick={() => {
-                      navigate("/login");
                       closeMenu();
+                      window.location.href = TRADING_LOGIN_URL;
                     }}
                   >
                     Login

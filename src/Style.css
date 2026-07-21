@@ -86,6 +86,33 @@ h2 {
   font-weight: 700;
 }
 
+.rekyc-nav-toggle {
+  border: 0;
+  background: transparent;
+}
+
+.rekyc-dropdown-menu {
+  min-width: 245px;
+  padding: 8px;
+  border: 1px solid rgba(0, 35, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 14px 38px rgba(20, 31, 74, 0.14);
+}
+
+.rekyc-dropdown-item {
+  border-radius: 8px;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 12px;
+}
+
+.rekyc-dropdown-item:hover,
+.rekyc-dropdown-item:focus {
+  background: #f2f4ff;
+  color: #1535ff;
+}
+
 /* buttons wrapper */
 .navbar-button {
   display: flex;
@@ -1784,6 +1811,10 @@ th {
   margin-top: 40px;
 }
 
+.rekyc-card {
+  width: min(620px, calc(100% - 32px));
+}
+
 .back-btn {
   text-align: right;
   cursor: pointer;
@@ -1793,10 +1824,26 @@ th {
   font-weight: 500;
 }
 
+.rekyc-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
 .logo-section h2 {
   text-align: center;
   font-size: 16px;
   margin-bottom: 5px;
+}
+
+.rekyc-helper-text {
+  margin: 6px 0 0;
+  color: #5f6472;
+  font-size: 14px;
+  text-align: center;
 }
 
 .title {
@@ -1935,6 +1982,51 @@ th {
 .btn-icon {
   width: 22px;
   height: 22px;
+}
+
+.rekyc-link-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.rekyc-process-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid rgba(0, 35, 255, 0.16);
+  border-radius: 12px;
+  color: #1f2937;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rekyc-process-link:hover,
+.rekyc-process-link:focus {
+  border-color: rgba(254, 102, 124, 0.56);
+  box-shadow: 0 12px 28px rgba(20, 31, 74, 0.12);
+  color: #1535ff;
+  transform: translateY(-1px);
+}
+
+.rekyc-process-link span {
+  display: grid;
+  gap: 4px;
+}
+
+.rekyc-process-link strong {
+  font-size: 15px;
+}
+
+.rekyc-process-link small {
+  color: #687083;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 /*========== Verification pages ==========*/

@@ -11,6 +11,7 @@ import email from "../assets/email.png";
 import Location from "../assets/Location.png";
 import time from "../assets/time.png";
 import Freezacc from "../assets/Freezacc.png";
+import rekycLinks from "../utils/rekycLinks";
 
 const pdfList = [
   {
@@ -288,21 +289,40 @@ const Investor = () => {
         <h2 className='text-center'>Investor Support</h2>
 
         <div className='d-flex Investor-header'>
-          <button
-            type='button'
-            className='investor-btn'
-            onClick={() => {
-              navigate("/rekycpage");
-            }}
-          >
-            Re KYC
-          </button>
+          <div className='dropdown'>
+            <button
+              type='button'
+              className='investor-btn dropdown-toggle'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
+            >
+              ReKYC
+            </button>
+            <ul className='dropdown-menu rekyc-dropdown-menu'>
+              {rekycLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    className='dropdown-item rekyc-dropdown-item'
+                    href={item.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <button
             type='button'
             className='investor-btn'
             onClick={() => {
-              navigate("/accountcloser");
+              window.open(
+                "https://closure.aionioncapital.com/cloud_closure/closure/aionion",
+                "_blank",
+                "noopener,noreferrer",
+              );
             }}
           >
             Account Closure
