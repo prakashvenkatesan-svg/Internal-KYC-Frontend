@@ -549,8 +549,9 @@ const Investor = () => {
                   </p>
                   <p>
                     <a
-                      href='/pdfs/June 2026_Investor Complaints Data_Stock Broker.pdf'
-                      download
+                      href='/pdfs/investor-complaints-june-2026-stock-broker.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
                     >
                       Monthly Compliance June 2026
                     </a>
@@ -563,8 +564,9 @@ const Investor = () => {
                   </p>
                   <p>
                     <a
-                      href='/pdfs/June 2026_Investor Complaints Data_Depository Participant.pdf'
-                      download
+                      href='/pdfs/investor-complaints-june-2026-depository-participant.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
                     >
                       Monthly Compliance June 2026
                     </a>
@@ -577,8 +579,9 @@ const Investor = () => {
                   </p>
                   <p>
                     <a
-                      href='/pdfs/June 2026_Investor Complaints Data_Research Analyst.pdf'
-                      download
+                      href='/pdfs/investor-complaints-june-2026-research-analyst.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
                     >
                       Monthly Compliance June 2026
                     </a>
