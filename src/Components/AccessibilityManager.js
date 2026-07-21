@@ -5,6 +5,7 @@ import {
   FaImage,
   FaPauseCircle,
   FaRedo,
+  FaTimes,
   FaUniversalAccess,
   FaVolumeUp,
 } from "react-icons/fa";
@@ -82,6 +83,7 @@ const AccessibilityManager = () => {
   const [reduceMotionEnabled, setReduceMotionEnabled] = useState(false);
   const [textSizeLevel, setTextSizeLevel] = useState(0);
   const lastSpokenRef = useRef("");
+  const panelRef = useRef(null);
 
   useEffect(() => {
     setHighContrast(readBooleanSetting(STORAGE_KEYS.highContrast));
@@ -92,6 +94,29 @@ const AccessibilityManager = () => {
     setTextSizeLevel(readTextSizeSetting());
     setIsReady(true);
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleClickOutside = (event) => {
+      if (panelRef.current?.contains(event.target)) return;
+      setIsOpen(false);
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isReady) return;
@@ -180,23 +205,33 @@ const AccessibilityManager = () => {
   };
 
   return (
-    <div data-accessibility-panel className='accessibility-panel'>
+    <div data-accessibility-panel className='accessibility-panel' ref={panelRef}>
       {isOpen && (
-        <div className='accessibility-menu'>
+        <div className='accessibility-menu' role='dialog' aria-label='Accessibility settings'>
           <div className='accessibility-menu-header'>
             <div>
               <p>Accessibility</p>
-              <span>Settings apply globally.</span>
             </div>
-            <button
-              type='button'
-              className='accessibility-reset'
-              onClick={resetSettings}
-              aria-label='Reset accessibility settings'
-              title='Reset'
-            >
-              <FaRedo aria-hidden='true' />
-            </button>
+            <div className='accessibility-header-actions'>
+              <button
+                type='button'
+                className='accessibility-icon-button'
+                onClick={resetSettings}
+                aria-label='Reset accessibility settings'
+                title='Reset'
+              >
+                <FaRedo aria-hidden='true' />
+              </button>
+              <button
+                type='button'
+                className='accessibility-icon-button'
+                onClick={() => setIsOpen(false)}
+                aria-label='Close accessibility settings'
+                title='Close'
+              >
+                <FaTimes aria-hidden='true' />
+              </button>
+            </div>
           </div>
 
           <div className='accessibility-menu-body'>
