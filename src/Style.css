@@ -530,6 +530,117 @@ h2 {
   height: 70px;
 }
 
+/* ========== INVESTOR ATTENTION SCROLLER ==========*/
+.investor-attention-scroller {
+  background: #ffffff;
+  padding: 28px 0;
+}
+
+.investor-attention-shell {
+  display: grid;
+  grid-template-columns: 185px minmax(0, 1fr);
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(0, 35, 255, 0.16);
+  border-radius: 18px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg, rgba(0, 35, 255, 0.55), rgba(254, 102, 124, 0.55))
+      border-box;
+  box-shadow: 0 18px 45px rgba(12, 23, 80, 0.08);
+}
+
+.investor-attention-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #0023ff 0%, #fe667c 100%);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.investor-attention-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  opacity: 0.84;
+}
+
+.investor-attention-track-wrap {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(72px, auto) auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 18px 22px 14px;
+  background: linear-gradient(90deg, #f8f9ff 0%, #ffffff 100%);
+}
+
+.investor-attention-message {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  margin: 0;
+  color: #1d2433;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  animation: investorAttentionFade 0.35s ease;
+}
+
+.investor-attention-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 18px;
+}
+
+.investor-attention-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 35, 255, 0.35);
+  background: #d8ddff;
+  cursor: pointer;
+  transition:
+    width 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.investor-attention-dot.active {
+  width: 22px;
+  border-radius: 999px;
+  border-color: transparent;
+  background: linear-gradient(90deg, #0023ff 0%, #fe667c 100%);
+}
+
+.investor-attention-dot:focus-visible {
+  outline: 2px solid #0023ff;
+  outline-offset: 3px;
+}
+
+@keyframes investorAttentionFade {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ========== FOOTER CSS ==========*/
 .Footer {
   background-color: #a2aeff;
@@ -577,6 +688,25 @@ h2 {
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #000;
+  text-decoration: none;
+}
+
+.footer-social-link:focus-visible {
+  outline: 2px solid #0023ff;
+  outline-offset: 3px;
+}
+
+.footer-x-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .footer-content-header {
@@ -4976,6 +5106,55 @@ th {
    max-width 767px
 ========================================================= */
 @media (max-width: 767px) {
+  .investor-attention-scroller {
+    padding: 18px 0;
+  }
+
+  .investor-attention-shell {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+  }
+
+  .investor-attention-label {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .investor-attention-kicker {
+    font-size: 11px;
+  }
+
+  .investor-attention-track-wrap {
+    grid-template-rows: minmax(94px, auto) auto;
+    gap: 8px;
+    min-height: 128px;
+    padding: 14px 16px 12px;
+  }
+
+  .investor-attention-message {
+    min-height: 94px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .investor-attention-dots {
+    gap: 6px;
+  }
+
+  .investor-attention-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .investor-attention-dot.active {
+    width: 18px;
+  }
+
   /* Footer */
   .footer-card-2 .d-flex {
     display: block !important;

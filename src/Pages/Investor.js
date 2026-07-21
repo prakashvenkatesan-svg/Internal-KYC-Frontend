@@ -154,13 +154,13 @@ const pdfList = [
   },
   {
     id: 28,
-    title: "INVESTOR AWARNESS AND ADVISIORY",
-    file: "/pdfs/Non-Individual-Application-form.pdf",
+    title: "INVESTOR AWARENESS AND ADVISORY",
+    file: "/pdfs/Investor-Awareness-Advisory-Form.pdf",
   },
   {
     id: 29,
     title: "INVESTOR CHARTER - STOCK BROKER",
-    file: "/pdfs/Investor-Awarness-Advisiory-Form.pdf",
+    file: "/pdfs/Investor-Charter-Stock-Broker-Form.pdf",
   },
   {
     id: 30,
@@ -496,19 +496,25 @@ const Investor = () => {
                     <strong>Stock Broker -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/June 2026_Investor Complaints Data_Stock Broker.pdf'
+                      download
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>
 
                 <div className='d-flex'>
                   <p>
-                    <strong>Depository -</strong>
+                    <strong>Depository Participant -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/June 2026_Investor Complaints Data_Depository Participant.pdf'
+                      download
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>
@@ -518,8 +524,11 @@ const Investor = () => {
                     <strong>Research Analyst -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/June 2026_Investor Complaints Data_Research Analyst.pdf'
+                      download
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>

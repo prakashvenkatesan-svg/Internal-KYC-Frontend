@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 //COMPONENTS
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import InvestorAttentionScroller from "./Components/InvestorAttentionScroller";
 import ScrollToTop from "./Components/ScrollToTop";
 import LoginForm from "./Components/LoginForm";
 import TradingLoginRedirect from "./Components/TradingLoginRedirect";
@@ -209,8 +210,13 @@ const Layout = () => {
           }
         />
       </Routes>
-    <Chatbot />
-      {!hideFooter && <Footer />}
+      <Chatbot />
+      {!hideFooter && (
+        <>
+          <InvestorAttentionScroller />
+          <Footer />
+        </>
+      )}
       <ToastContainer position='top-right' autoClose={2500} />
     </>
   );
