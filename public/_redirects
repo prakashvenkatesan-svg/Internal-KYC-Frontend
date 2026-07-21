@@ -1,1 +1,17 @@
+/privacy-policy /privacy 301
+/privacy-policy/* /privacy 301
+/disclaimer /more?section=Disclaimers 301
+/disclaimer/* /more?section=Disclaimers 301
+/refund-cancellation /more?section=Refund 301
+/refund-cancellation/* /more?section=Refund 301
+/terms-and-conditions /more?section=Terms 301
+/terms-and-conditions/* /more?section=Terms 301
+/bonddetails /more?section=bond 301
+/bonddetails/* /more?section=bond 301
+/demataccount /openaccount 301
+/demataccount/* /openaccount 301
+/get-app /plus 301
+/get-app/* /plus 301
+/home / 301
+/home/* / 301
 /* /index.html 200

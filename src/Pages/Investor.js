@@ -17,23 +17,23 @@ const pdfList = [
   {
     id: 1,
     title: "Individual Application Form",
-    file: "/pdfs/individual-application-form.pdf",
+    file: "/pdfs/Individual-Application-Form.pdf",
   },
   {
     id: 2,
     title: "Non-Individual Application Form",
-    file: "/pdfs/Non-Individual-Application-form.pdf",
+    file: "/pdfs/Non-Individual-Application-Form.pdf",
   },
   {
     id: 3,
     title:
       "CLIENT REGISTRATION DOCUMENTS (RIGHTS & OBLIGATIONS, RISK DISCLOSURE DOCUMENT, DO'S & DON'T'S) IN VERNACULAR LANGUAGE",
-    file: "/pdfs/files/Annexure_E_CRD in_vernacular_languages.zip",
+    file: "/files/Annexure_E_CRD in_vernacular_languages.zip",
   },
   {
     id: 4,
     title: "FINANCIAL DETAILS UPDATION FORM",
-    file: "/pdfs/Financial-Details-Updation-form.pdf",
+    file: "/pdfs/Financial-Details-Updation-Form.pdf",
   },
   {
     id: 5,
@@ -74,12 +74,12 @@ const pdfList = [
   {
     id: 12,
     title: "ADVISORY - KYC COMPLIANCE",
-    file: "/pdfs/Advisory-Form.pdf",
+    file: "/pdfs/6 KYC attributes.pdf",
   },
   {
     id: 13,
     title: "RESEARCH ANALYST ANNUAL COMPLIANCE REPORT FY 24-25",
-    file: "/pdfs/Research-Analyst-Form.pdf",
+    file: "/pdfs/Website_Annexure to Auditors Report.pdf",
   },
   {
     id: 14,
@@ -269,6 +269,17 @@ const bankDetails = [
   },
 ];
 
+const backOfficeLinks = [
+  {
+    label: "Client Back Office",
+    href: "https://bo.aionioncapital.com/WebGroup/",
+  },
+  {
+    label: "Branch Back Office",
+    href: "https://bo.aionioncapital.com/WebLogin/index.cfm?Logintype=Branch",
+  },
+];
+
 const Investor = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -328,9 +339,30 @@ const Investor = () => {
             Account Closure
           </button>
 
-          <button type='button' className='investor-btn'>
-            Back Office
-          </button>
+          <div className='dropdown'>
+            <button
+              type='button'
+              className='investor-btn dropdown-toggle'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
+            >
+              Back Office
+            </button>
+            <ul className='dropdown-menu rekyc-dropdown-menu'>
+              {backOfficeLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    className='dropdown-item rekyc-dropdown-item'
+                    href={item.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
