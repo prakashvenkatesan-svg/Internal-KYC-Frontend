@@ -282,7 +282,7 @@ const Aboutus = () => {
 
                 <div>
                   <p className='label'>TAN</p>
-                  <p className='value'>CHEA3728IG</p>
+                  <p className='value'>CHEA37281G</p>
                 </div>
 
                 <div>
