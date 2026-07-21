@@ -307,7 +307,7 @@ const Aboutus = () => {
 
                 <div>
                   <p className='label'>CDSL DPID</p>
-                  <p className='value'>12010800</p>
+                  <p className='value'>12100800</p>
                 </div>
 
                 <div>
