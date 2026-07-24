@@ -273,7 +273,7 @@ const Home = () => {
 
               <div className='secf-footer'>
                 <a
-                  href='https://play.google.com/store/apps/details?id=com.intellectsoftwares.aionioncaptial'
+                  href='https://play.google.com/store/apps/details?id=com.aionioncapital.plus&hl=en_IN'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
@@ -281,7 +281,7 @@ const Home = () => {
                 </a>
 
                 <a
-                  href='https://apps.apple.com/us/app/aionion-capital/id6740156959'
+                  href='https://apps.apple.com/in/app/aionion-capital-plus/id6754834631'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
@@ -296,7 +296,7 @@ const Home = () => {
       <div className='Section-G'>
         <div className='container'>
           <h2 className='text-center'>38K+ User World Wide</h2>
-          <h3 className='text-center'>Investor Attention</h3>
+          <h3 className='text-center'>Feedback from Investors</h3>
 
           <div className='testimonial-section'>
             <FaQuoteLeft className='quote-icon' />

@@ -11,28 +11,29 @@ import email from "../assets/email.png";
 import Location from "../assets/Location.png";
 import time from "../assets/time.png";
 import Freezacc from "../assets/Freezacc.png";
+import rekycLinks from "../utils/rekycLinks";
 
 const pdfList = [
   {
     id: 1,
     title: "Individual Application Form",
-    file: "/pdfs/individual-application-form.pdf",
+    file: "/pdfs/Individual-Application-Form.pdf",
   },
   {
     id: 2,
     title: "Non-Individual Application Form",
-    file: "/pdfs/Non-Individual-Application-form.pdf",
+    file: "/pdfs/Non-Individual-Application-Form.pdf",
   },
   {
     id: 3,
     title:
       "CLIENT REGISTRATION DOCUMENTS (RIGHTS & OBLIGATIONS, RISK DISCLOSURE DOCUMENT, DO'S & DON'T'S) IN VERNACULAR LANGUAGE",
-    file: "/pdfs/files/Annexure_E_CRD in_vernacular_languages.zip",
+    file: "/files/Annexure_E_CRD in_vernacular_languages.zip",
   },
   {
     id: 4,
     title: "FINANCIAL DETAILS UPDATION FORM",
-    file: "/pdfs/Financial-Details-Updation-form.pdf",
+    file: "/pdfs/Financial-Details-Updation-Form.pdf",
   },
   {
     id: 5,
@@ -73,12 +74,12 @@ const pdfList = [
   {
     id: 12,
     title: "ADVISORY - KYC COMPLIANCE",
-    file: "/pdfs/Advisory-Form.pdf",
+    file: "/pdfs/6 KYC attributes.pdf",
   },
   {
     id: 13,
     title: "RESEARCH ANALYST ANNUAL COMPLIANCE REPORT FY 24-25",
-    file: "/pdfs/Research-Analyst-Form.pdf",
+    file: "/pdfs/Website_Annexure to Auditors Report.pdf",
   },
   {
     id: 14,
@@ -154,13 +155,13 @@ const pdfList = [
   },
   {
     id: 28,
-    title: "INVESTOR AWARNESS AND ADVISIORY",
-    file: "/pdfs/Non-Individual-Application-form.pdf",
+    title: "INVESTOR AWARENESS AND ADVISORY",
+    file: "/pdfs/Investor-Awareness-Advisory-Form.pdf",
   },
   {
     id: 29,
     title: "INVESTOR CHARTER - STOCK BROKER",
-    file: "/pdfs/Investor-Awarness-Advisiory-Form.pdf",
+    file: "/pdfs/Investor-Charter-Stock-Broker-Form.pdf",
   },
   {
     id: 30,
@@ -268,6 +269,17 @@ const bankDetails = [
   },
 ];
 
+const backOfficeLinks = [
+  {
+    label: "Client Back Office",
+    href: "https://bo.aionioncapital.com/WebGroup/",
+  },
+  {
+    label: "Branch Back Office",
+    href: "https://bo.aionioncapital.com/WebLogin/index.cfm?Logintype=Branch",
+  },
+];
+
 const Investor = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -288,29 +300,69 @@ const Investor = () => {
         <h2 className='text-center'>Investor Support</h2>
 
         <div className='d-flex Investor-header'>
-          <button
-            type='button'
-            className='investor-btn'
-            onClick={() => {
-              navigate("/rekycpage");
-            }}
-          >
-            Re KYC
-          </button>
+          <div className='dropdown'>
+            <button
+              type='button'
+              className='investor-btn dropdown-toggle'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
+            >
+              ReKYC
+            </button>
+            <ul className='dropdown-menu rekyc-dropdown-menu'>
+              {rekycLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    className='dropdown-item rekyc-dropdown-item'
+                    href={item.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <button
             type='button'
             className='investor-btn'
             onClick={() => {
-              navigate("/accountcloser");
+              window.open(
+                "https://closure.aionioncapital.com/cloud_closure/closure/aionion",
+                "_blank",
+                "noopener,noreferrer",
+              );
             }}
           >
             Account Closure
           </button>
 
-          <button type='button' className='investor-btn'>
-            Back Office
-          </button>
+          <div className='dropdown'>
+            <button
+              type='button'
+              className='investor-btn dropdown-toggle'
+              data-bs-toggle='dropdown'
+              aria-expanded='false'
+            >
+              Back Office
+            </button>
+            <ul className='dropdown-menu rekyc-dropdown-menu'>
+              {backOfficeLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    className='dropdown-item rekyc-dropdown-item'
+                    href={item.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -422,15 +474,17 @@ const Investor = () => {
               </p>
 
               <p>
-                3. You may also access the
+                3. You may also access the SMART Online Resolution of Dispute
+                Portal at{" "}
                 <a
                   href='https://smartodr.in/login'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  SMART Online Resolution of Dispute Portal
+                  https://smartodr.in/login
                 </a>
-                . For further information, you can review the
+                . For further information, you can review the SEBI ODR circular
+                at{" "}
                 <a
                   href='https://www.sebi.gov.in/legal/circulars/aug-2023/online-dispute-resolution-in-the-indian-securities-market_75345.html'
                   target='_blank'
@@ -496,19 +550,27 @@ const Investor = () => {
                     <strong>Stock Broker -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/investor-complaints-june-2026-stock-broker.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>
 
                 <div className='d-flex'>
                   <p>
-                    <strong>Depository -</strong>
+                    <strong>Depository Participant -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/investor-complaints-june-2026-depository-participant.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>
@@ -518,8 +580,12 @@ const Investor = () => {
                     <strong>Research Analyst -</strong>
                   </p>
                   <p>
-                    <a href='/pdfs/monthly-compliance-dec-2025.pdf' download>
-                      Monthly Compliance December 2025
+                    <a
+                      href='/pdfs/investor-complaints-june-2026-research-analyst.pdf'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      Monthly Compliance June 2026
                     </a>
                   </p>
                 </div>
@@ -577,7 +643,7 @@ const Investor = () => {
 
       <div className='investor-account' id='bank-details'>
         <div className='container'>
-          <h2 className='text-center'>Equity Account Details</h2>
+          <h2 className='text-center'>Bank Details</h2>
           <h3 className="bank-detail-title">
             Kindly ensure you strictly follow the instructions provided on the
             Trade app and website before proceeding with your fund transfer.
