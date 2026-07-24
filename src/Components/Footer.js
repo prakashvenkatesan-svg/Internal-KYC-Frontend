@@ -1,45 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaXTwitter } from "react-icons/fa6";
 
 import Aionionlogo from "../assets/Aionionlogo.png";
 import yt from "../assets/yt.png";
 import instra from "../assets/instra.png";
 import linkedin from "../assets/linkedin.png";
+import twitter from "../assets/twitter.png";
 import fb from "../assets/fb.png";
 
 import appstorewhite from "../assets/appstorewhite.png";
 import googleplaywhite from "../assets/googleplaywhite.png";
 
 import "../Style.css";
-
-const socialLinks = [
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/aionioncapital",
-    icon: fb,
-  },
-  {
-    name: "X",
-    href: "https://x.com/aionioncapital",
-    Icon: FaXTwitter,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/company/aionioncapital",
-    icon: linkedin,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/aionionoffl",
-    icon: instra,
-  },
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com/@AionionCapital",
-    icon: yt,
-  },
-];
 
 const Footer = () => {
   return (
@@ -51,26 +23,11 @@ const Footer = () => {
           </div>
 
           <div className='d-flex gap-3 iconimg'>
-            {socialLinks.map((item) => (
-              <a
-                href={item.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label={`Open Aionion Capital on ${item.name}`}
-                className='footer-social-link'
-                key={item.name}
-              >
-                {item.Icon ? (
-                  <item.Icon className='footer-x-icon' aria-hidden='true' />
-                ) : (
-                  <img
-                    src={item.icon}
-                    alt={`${item.name} logo`}
-                    className='footerimg'
-                  />
-                )}
-              </a>
-            ))}
+            <img src={fb} alt='fb' className='footerimg' />
+            <img src={twitter} alt='twitter' className='footerimg' />
+            <img src={linkedin} alt='linkedin' className='footerimg' />
+            <img src={instra} alt='instagram' className='footerimg' />
+            <img src={yt} alt='yt' className='footerimg' />
           </div>
         </div>
 
@@ -363,15 +320,8 @@ const Footer = () => {
           </p>
           <p className='p-tag'>
             The comprehensive details of Depository Participants is displayed on
-            CDSL website at following link:{" "}
-            <a
-              href='https://www.cdslindia.com/eservices/DP/DPDatabase'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='footer-inline-link'
-            >
-              https://www.cdslindia.com/eservices/DP/DPDatabase
-            </a>
+            CDSL website at following link:
+            https://www.cdslindia.com/eservices/DP/DPDatabase
           </p>
           <h6 className='text-center'>
             Investments in securities market are subject to market risks, read

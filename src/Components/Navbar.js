@@ -6,8 +6,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Aionionlogo from "../assets/Aionionlogo.png";
 import "../Style.css";
 
-const TRADING_LOGIN_URL = "http://tradeplus.aionioncapital.com/";
-
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -49,7 +47,7 @@ const Navbar = () => {
   return (
     <div className='Navbar'>
       <div className='container p-0'>
-        <nav className='navbar navbar-expand-xl navbar-light custom-navbar'>
+        <nav className='navbar navbar-expand-xxl navbar-light custom-navbar'>
           {showLogoOnly ? (
             <>
               <img
@@ -148,7 +146,6 @@ const Navbar = () => {
                       More
                     </NavLink>
                   </li>
-
                 </ul>
 
                 <div className='navbar-button'>
@@ -160,15 +157,15 @@ const Navbar = () => {
                       closeMenu();
                     }}
                   >
-                    Open Account
+                    Register
                   </button>
 
                   <button
                     type='button'
                     className='loginbtn'
                     onClick={() => {
+                      navigate("/login");
                       closeMenu();
-                      window.location.href = TRADING_LOGIN_URL;
                     }}
                   >
                     Login
