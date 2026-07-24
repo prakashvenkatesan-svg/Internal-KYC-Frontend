@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import "../Style.css";
 
-const TRADING_LOGIN_URL = "http://tradeplus.aionioncapital.com/";
+const TRADING_LOGIN_URL = "https://tradeplus.aionioncapital.com/";
 
 const TradingLoginRedirect = () => {
   useEffect(() => {
