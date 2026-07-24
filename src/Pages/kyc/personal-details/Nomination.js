@@ -12,6 +12,7 @@ import emailicon from "../../../assets/nominee-mail.png";
 import aadhaaricon from "../../../assets/nominee-aadhaar.png";
 import panicon from "../../../assets/nominee-pancard.png";
 import addressicon from "../../../assets/nominee-address.png";
+import PdfDeclarationPopup from "../../../Components/common/PdfDeclarationPopup/PdfDeclarationPopup";
 
 const MAX_NOMINEES = 5;
 
@@ -1543,13 +1544,10 @@ const parseDisplayDob = (value) => {
                       disabled={loading}
                     />
 
-                    <label htmlFor='terms' className='personal-details-right-obli'
->
-                      I further confirm having read and understood the contents of
-                      the “Rights and Obligations” document(s) and “Risk Disclosure
-                      Document” MITC. I / We do hereby agree to be bound by such
-                      provisions as outlined in these documents.
-                    </label>
+                    <PdfDeclarationPopup 
+                      id='terms'
+                      className='personal-details-right-obli'
+                    />
                   </div>
 
                   {errors.rightsAccepted && (

@@ -8,6 +8,7 @@ import editicon from "../../../assets/editicon.png";
 import deleteicon from "../../../assets/deleteicon.png";
 import addicon from "../../../assets/addicon.png";
 import api from "../../../services/api";
+import PdfDeclarationPopup from "../../../Components/common/PdfDeclarationPopup/PdfDeclarationPopup";
 
 const Percentageallocation = () => {
   const navigate = useNavigate();
@@ -273,12 +274,9 @@ const Percentageallocation = () => {
             checked={rightsAccepted}
             onChange={(e) => setRightsAccepted(e.target.checked)}
           />
-          <label htmlFor='terms'>
-            I further confirm having read and understood the contents of the
-            “Rights and Obligations” document(s) and “Risk Disclosure Document”
-            MITC. I We do hereby agree to be bound by such provisions as
-            outlined in these documents.
-          </label>
+          <PdfDeclarationPopup 
+            id='terms'
+          />
         </div>
 
         {generalError && <p className='error-text mt-3'>{generalError}</p>}

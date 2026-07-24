@@ -10,9 +10,10 @@ import person from "../../../assets/person.png";
 import identityproof from "../../../assets/identityproof.png";
 import aadhaarproof from "../../../assets/aadhaarproof.png";
 import pefproof from "../../../assets/pefproof.png";
-
 import standingiconcolor from "../../../assets/standingiconcolor.png";
 import standingiconwhite from "../../../assets/standingiconwhite.png";
+import Personicon from "../../../assets/Personicon.png";
+import PdfDeclarationPopup from "../../../Components/common/PdfDeclarationPopup/PdfDeclarationPopup";
 import phone from "../../../assets/phone.png";
 import email from "../../../assets/email.png";
 
@@ -1028,15 +1029,10 @@ const PersonalDetails = () => {
               checked={formData.rightsAccepted}
               onChange={handleChange}
             />
-            <label
-              htmlFor='rightsObligations'
+            <PdfDeclarationPopup 
+              id='rightsObligations'
               className='personal-details-right-obli'
-            >
-              I further confirm having read and understood the contents of the
-              “Rights and Obligations” document(s) and “Risk Disclosure
-              Document” MITC. I / We do hereby agree to be bound by such
-              provisions as outlined in these documents.
-            </label>
+            />
           </div>
           {errors.rightsAccepted && (
             <p className='error-text'>{errors.rightsAccepted}</p>

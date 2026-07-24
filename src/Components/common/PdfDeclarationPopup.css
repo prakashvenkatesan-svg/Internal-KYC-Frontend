@@ -1,0 +1,125 @@
+.pdf-declaration-wrapper {
+  position: relative;
+  display: inline;
+}
+
+.pdf-declaration-label {
+  cursor: pointer;
+  display: inline;
+}
+
+.pdf-highlight-text {
+  cursor: pointer;
+  color: #0056b3;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #0056b3;
+  text-underline-offset: 3px;
+  position: relative;
+}
+
+.pdf-popup-container {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  width: max-content;
+  max-width: 300px;
+  z-index: 1050; /* Suitable z-index above other elements */
+  cursor: default;
+}
+
+.pdf-popup-container::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.pdf-popup-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.pdf-popup-header-mobile {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pdf-popup-header-desktop {
+  display: block;
+}
+
+.pdf-popup-close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  line-height: 1;
+}
+
+.pdf-popup-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pdf-popup-list li {
+  margin-bottom: 10px;
+}
+
+.pdf-popup-list li:last-child {
+  margin-bottom: 0;
+}
+
+.pdf-popup-list a {
+  text-decoration: none;
+  color: #0056b3;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.pdf-popup-list a:hover {
+  color: #003d82;
+  text-decoration: underline;
+}
+
+@media (max-width: 991px) {
+  .pdf-popup-container {
+    left: 20%;
+    transform: translateX(-20%);
+    width: 260px;
+  }
+  
+  .pdf-popup-container::after {
+    left: 20%;
+    transform: translateX(-20%);
+  }
+  
+  .pdf-popup-header-mobile {
+    display: flex;
+  }
+  
+  .pdf-popup-header-desktop {
+    display: none;
+  }
+}
