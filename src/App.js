@@ -4,12 +4,9 @@ import React, { useEffect, useState } from "react";
 //COMPONENTS
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-import InvestorAttentionScroller from "./Components/InvestorAttentionScroller";
-import AccessibilityManager from "./Components/AccessibilityManager";
 import ScrollToTop from "./Components/ScrollToTop";
 import LoginForm from "./Components/LoginForm";
 import TradingLoginRedirect from "./Components/TradingLoginRedirect";
-import LegacyRedirect from "./Components/LegacyRedirect";
 
 //PAGES
 import Home from "./Pages/Home";
@@ -19,7 +16,6 @@ import Contact from "./Pages/Contact";
 import Investor from "./Pages/Investor";
 import Privacy from "./Pages/Privacy";
 import More from "./Pages/More";
-import Plus from "./Pages/Plus";
 
 //Admin
 import AdminDashboard from "./Pages/admin/Dashboard";
@@ -74,12 +70,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Chatbot from "./Components/chatbot/Chatbot";
 
-const resourcesHashRedirects = {
-  "#find-complaint": "/investor#complaint-procedure",
-  "#excalation-matrix": "/investor#escalation-matrix",
-  "#bank-details": "/investor#bank-details",
-  "#smart-odr": "/investor#sebi-score",
-};
 
 const Layout = () => {
   const location = useLocation();
@@ -135,38 +125,7 @@ const Layout = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/investor' element={<Investor />} />
         <Route path='/privacy' element={<Privacy />} />
-        <Route path='/more' element={<More />} />
         <Route path='/More' element={<More />} />
-        <Route path='/plus' element={<Plus />} />
-        <Route
-          path='/resources/*'
-          element={
-            <LegacyRedirect
-              to='/investor'
-              hashMap={resourcesHashRedirects}
-            />
-          }
-        />
-        <Route path='/privacy-policy/*' element={<LegacyRedirect to='/privacy' />} />
-        <Route
-          path='/disclaimer/*'
-          element={<LegacyRedirect to='/more?section=Disclaimers' />}
-        />
-        <Route
-          path='/refund-cancellation/*'
-          element={<LegacyRedirect to='/more?section=Refund' />}
-        />
-        <Route
-          path='/terms-and-conditions/*'
-          element={<LegacyRedirect to='/more?section=Terms' />}
-        />
-        <Route
-          path='/bonddetails/*'
-          element={<LegacyRedirect to='/more?section=bond' />}
-        />
-        <Route path='/demataccount/*' element={<LegacyRedirect to='/openaccount' />} />
-        <Route path='/get-app/*' element={<LegacyRedirect to='/plus' />} />
-        <Route path='/home/*' element={<LegacyRedirect to='/' />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/trading-login' element={<TradingLoginRedirect />} />
         <Route path='/openaccount' element={<Openaccount />} />
@@ -250,14 +209,8 @@ const Layout = () => {
           }
         />
       </Routes>
-      <Chatbot />
-      <AccessibilityManager />
-      {!hideFooter && (
-        <>
-          <InvestorAttentionScroller />
-          <Footer />
-        </>
-      )}
+    <Chatbot />
+      {!hideFooter && <Footer />}
       <ToastContainer position='top-right' autoClose={2500} />
     </>
   );
