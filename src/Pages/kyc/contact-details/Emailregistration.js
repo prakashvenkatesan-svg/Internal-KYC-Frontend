@@ -228,7 +228,8 @@ const Emailregistration = () => {
                   className='terms-text'
                   onClick={(e) => {
                     e.preventDefault();
-                    setShowModal(true);
+                    e.stopPropagation();
+                    setShowModal(!showModal);
                   }}
                   style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
                 >
@@ -236,30 +237,62 @@ const Emailregistration = () => {
                 </span>
 
                 {showModal && (
-                  <div className="terms-popup" style={{
-                      display: 'block',
-                      position: 'absolute', top: '100%', left: '0', 
-                      background: '#fff', border: '1px solid #ccc', padding: '15px', 
-                      borderRadius: '5px', zIndex: 10, marginTop: '5px', width: '100%',
-                      boxShadow: '0px 4px 6px rgba(0,0,0,0.1)'
-                    }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                       <strong style={{ fontSize: '14px', color: '#000' }}>Terms & Conditions</strong>
-                       <span style={{ cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }} onClick={() => setShowModal(false)}>✕</span>
+                  <>
+                    {/* Invisible backdrop for outside click */}
+                    <div
+                      style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 9
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setShowModal(false);
+                      }}
+                    />
+                    <div className="terms-popup" style={{
+                        display: 'block',
+                        position: 'absolute', 
+                        bottom: '100%', 
+                        left: '0', 
+                        background: '#fff', 
+                        border: '1px solid #e2e8f0', 
+                        padding: '20px', 
+                        borderRadius: '12px', 
+                        zIndex: 10, 
+                        marginBottom: '15px', 
+                        width: '320px',
+                        maxWidth: '90vw',
+                        maxHeight: '300px',
+                        overflowY: 'auto',
+                        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)'
+                      }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', position: 'sticky', top: '-20px', background: '#fff', paddingBottom: '10px', borderBottom: '1px solid #eee' }}>
+                         <strong style={{ fontSize: '15px', color: '#1e293b' }}>Terms & Conditions</strong>
+                         <span style={{ cursor: 'pointer', fontWeight: 'bold', fontSize: '18px', color: '#64748b' }} onClick={(e) => {
+                           e.stopPropagation();
+                           e.preventDefault();
+                           setShowModal(false);
+                         }}>✕</span>
+                      </div>
+                      <p style={{ fontSize: '13px', lineHeight: '1.6', margin: 0, textAlign: 'left', color: '#475569' }}>
+                        I hereby give my consent to undertake the online KYC process for
+                        opening a Trading/Demat account with Aionion Capital Market Services
+                        Private Limited. I am voluntarily providing this email ID and mobile
+                        number to AIONION CAPITAL MARKET SERVICES PRIVATE LIMITED for
+                        communication purposes. I confirm that the provided email ID and
+                        mobile number belong solely to me. I request all formal, informal, and
+                        promotional communications to be sent to the provided email ID and
+                        mobile number. Additionally, I voluntarily authorize AIONION CAPITAL
+                        MARKET SERVICES PRIVATE LIMITED to send all trading and
+                        transaction-related statements to this mobile number.
+                      </p>
                     </div>
-                    <p style={{ fontSize: '13px', lineHeight: '1.5', margin: 0, textAlign: 'left' }}>
-                      I hereby give my consent to undertake the online KYC process for
-                      opening a Trading/Demat account with Aionion Capital Market Services
-                      Private Limited. I am voluntarily providing this email ID and mobile
-                      number to AIONION CAPITAL MARKET SERVICES PRIVATE LIMITED for
-                      communication purposes. I confirm that the provided email ID and
-                      mobile number belong solely to me. I request all formal, informal, and
-                      promotional communications to be sent to the provided email ID and
-                      mobile number. Additionally, I voluntarily authorize AIONION CAPITAL
-                      MARKET SERVICES PRIVATE LIMITED to send all trading and
-                      transaction-related statements to this mobile number.
-                    </p>
-                  </div>
+                  </>
                 )}
               </div>
             </div>
