@@ -34,7 +34,7 @@ const Data = [
 
 const Person = [
   {
-    title: "Director",
+    title: "Additional Director",
     name: "Srinivasan Anand",
     number: "044-46895225",
     mail: "anandsrinivasan@aionioncapital.com",
@@ -109,10 +109,10 @@ const teambranch = [
   {
     city: "BANGALORE",
     address: [
-      "Novel Tech Park, 46/4, 2nd Floor,",
-      "Hosur Rd, Kudlu Gate,",
-      "Krishna Reddy Industrial Area,",
-      "HSR Extension, Bengaluru - 560068",
+      "2062, 1st Floor,",
+      "23rd Main Rd, Vanganahalli,",
+      "1st Sector, HSR Layout,",
+      "Bengaluru, Karnataka 560102",
     ],
   },
 ];
@@ -167,11 +167,13 @@ const Aboutus = () => {
 
             <div>
               <p>
-                We are a <strong>new-age stockbroking</strong> company from
-                Chennai, here to simplify your investment journey. With a
-                steadfast commitment to empowering investors, we focus on
-                creating informed investment communities and facilitating
-                seamless access to financial markets.
+                <strong>
+                  Aionion Capital Market Services Private Limited
+                </strong>{" "}
+                is a new-age stockbroking company, here to simplify your
+                investment journey. With a steadfast commitment to empowering
+                investors, we focus on creating informed investment communities
+                and facilitating seamless access to financial markets.
               </p>
             </div>
           </div>
@@ -201,8 +203,14 @@ const Aboutus = () => {
 
       <div className='container'>
         <h2 className='text-center people-header' id='meet-the-people'>
-          Meet the People Behind Aionion Capital
+          Details of Key Managerial Personnel (KMPs) Including Compliance
+          Officer
         </h2>
+        <p className='people-subtitle text-center'>
+          Detailed list of individuals authorized to act on behalf of Aionion
+          Capital Market Services Private Limited, including their contact
+          details.
+        </p>
 
         <div className='row mb-4'>
           {Person.map((item, index) => (
@@ -274,7 +282,7 @@ const Aboutus = () => {
 
                 <div>
                   <p className='label'>TAN</p>
-                  <p className='value'>CHEA3728IG</p>
+                  <p className='value'>CHEA37281G</p>
                 </div>
 
                 <div>
@@ -299,7 +307,7 @@ const Aboutus = () => {
 
                 <div>
                   <p className='label'>CDSL DPID</p>
-                  <p className='value'>12010800</p>
+                  <p className='value'>12100800</p>
                 </div>
 
                 <div>

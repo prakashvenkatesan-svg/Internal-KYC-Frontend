@@ -86,10 +86,10 @@ const teambranch = [
   {
     city: "BANGALORE",
     address: [
-      "Novel Tech Park, 46/4, 2nd Floor,",
-      "Hosur Rd, Kudlu Gate,",
-      "Krishna Reddy Industrial Area,",
-      "HSR Extension, Bengaluru - 560068",
+      "2062, 1st Floor,",
+      "23rd Main Rd, Vanganahalli,",
+      "1st Sector, HSR Layout,",
+      "Bengaluru, Karnataka 560102",
     ],
   },
 ];
