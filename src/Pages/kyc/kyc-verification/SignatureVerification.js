@@ -23,6 +23,7 @@ const SignatureVerification = () => {
   const [loading, setLoading] = useState(false);
   const [statusLoading, setStatusLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfFrameLoading, setPdfFrameLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [pdfMessage, setPdfMessage] = useState("");
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState("");
@@ -218,6 +219,7 @@ const SignatureVerification = () => {
       return;
     }
 
+    setPdfFrameLoading(true);
     setPdfPreviewUrl(pdfResult.url);
     setPdfMessage(
       "Review the full PDF below, then confirm and proceed to eSign.",
@@ -473,19 +475,44 @@ const SignatureVerification = () => {
                   height: "70vh",
                   minHeight: "540px",
                   background: "#eef3ff",
+                  position: "relative",
                 }}
               >
                 {pdfPreviewUrl ? (
-                  <iframe
-                    title='Application PDF Preview'
-                    src={pdfPreviewUrl}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      border: "0",
-                      background: "#fff",
-                    }}
-                  />
+                  <>
+                    {pdfFrameLoading ? (
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          zIndex: 1,
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "10px",
+                          color: "#264095",
+                          background: "#eef3ff",
+                        }}
+                      >
+                        <div className="spinner-border text-primary" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                        <span>Loading PDF preview...</span>
+                      </div>
+                    ) : null}
+                    <iframe
+                      title='Application PDF Preview'
+                      src={pdfPreviewUrl}
+                      onLoad={() => setPdfFrameLoading(false)}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        border: "0",
+                        background: "#fff",
+                      }}
+                    />
+                  </>
                 ) : (
                   <div
                     style={{
