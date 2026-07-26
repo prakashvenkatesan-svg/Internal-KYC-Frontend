@@ -121,19 +121,36 @@ const PhotoVerification = () => {
   const avgEyeY = (leftEyeY + rightEyeY) / 2;
 
   if (avgEyeY > mouthY) {
-    setError("Face is upside down. Please orient your camera correctly.");
-    return;
+    setError("Face appears upside down. If the preview is inverted, use the Rotate button.");
+  } else {
+    setError("");
   }
 
   setCapturedImage(imageSrc);
   setCameraOpen(false);
-  setError("");
 };
 
   const cancelPhoto = () => {
     setCameraOpen(false);
     setCapturedImage(null);
     setError("");
+  };
+
+  const handleRotate = () => {
+    if (!capturedImage) return;
+    const img = new Image();
+    img.src = capturedImage;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(Math.PI);
+      ctx.drawImage(img, -img.width / 2, -img.height / 2);
+      setCapturedImage(canvas.toDataURL("image/jpeg"));
+      setError("");
+    };
   };
 
   const handleContinue = async () => {
@@ -301,6 +318,14 @@ const PhotoVerification = () => {
                       onClick={cancelPhoto}
                     >
                       Retake
+                    </button>
+
+                    <button
+                      type='button'
+                      className='btn btn-warning'
+                      onClick={handleRotate}
+                    >
+                      Rotate 180°
                     </button>
 
                     <button
