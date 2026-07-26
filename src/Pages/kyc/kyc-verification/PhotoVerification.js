@@ -44,6 +44,7 @@ const PhotoVerification = () => {
 
     const loadModels = async () => {
       await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+      await faceapi.nets.faceLandmark68TinyNet.loadFromUri("/models");
     };
 
     loadModels();
@@ -101,7 +102,7 @@ const PhotoVerification = () => {
   const detections = await faceapi.detectAllFaces(
     img,
     new faceapi.TinyFaceDetectorOptions()
-  );
+  ).withFaceLandmarks(true);
 
   if (detections.length === 0) {
     setError("No human face detected.");
@@ -110,6 +111,17 @@ const PhotoVerification = () => {
 
   if (detections.length > 1) {
     setError("Multiple faces detected. Please ensure only one person is visible.");
+    return;
+  }
+
+  const landmarks = detections[0].landmarks;
+  const leftEyeY = landmarks.getLeftEye()[0].y;
+  const rightEyeY = landmarks.getRightEye()[0].y;
+  const mouthY = landmarks.getMouth()[0].y;
+  const avgEyeY = (leftEyeY + rightEyeY) / 2;
+
+  if (avgEyeY > mouthY) {
+    setError("Face is upside down. Please orient your camera correctly.");
     return;
   }
 
