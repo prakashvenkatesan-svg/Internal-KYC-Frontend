@@ -24,6 +24,7 @@ const SignatureVerification = () => {
   const [statusLoading, setStatusLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfFrameLoading, setPdfFrameLoading] = useState(false);
+  const [pdfFrameIssue, setPdfFrameIssue] = useState(false);
   const [message, setMessage] = useState("");
   const [pdfMessage, setPdfMessage] = useState("");
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState("");
@@ -86,6 +87,19 @@ const SignatureVerification = () => {
       cancelled = true;
     };
   }, [applicationId]);
+
+  useEffect(() => {
+    if (!pdfFrameLoading || !pdfPreviewUrl) {
+      return undefined;
+    }
+
+    const fallbackTimer = window.setTimeout(() => {
+      setPdfFrameLoading(false);
+      setPdfFrameIssue(true);
+    }, 12000);
+
+    return () => window.clearTimeout(fallbackTimer);
+  }, [pdfFrameLoading, pdfPreviewUrl]);
 
   useEffect(() => {
     if (!applicationId || !hasReturnFromEsign) {
@@ -220,6 +234,7 @@ const SignatureVerification = () => {
     }
 
     setPdfFrameLoading(true);
+    setPdfFrameIssue(false);
     setPdfPreviewUrl(pdfResult.url);
     setPdfMessage(
       "Review the full PDF below, then confirm and proceed to eSign.",
@@ -504,7 +519,14 @@ const SignatureVerification = () => {
                     <iframe
                       title='Application PDF Preview'
                       src={pdfPreviewUrl}
-                      onLoad={() => setPdfFrameLoading(false)}
+                      onLoad={() => {
+                        setPdfFrameLoading(false);
+                        setPdfFrameIssue(false);
+                      }}
+                      onError={() => {
+                        setPdfFrameLoading(false);
+                        setPdfFrameIssue(true);
+                      }}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -512,6 +534,50 @@ const SignatureVerification = () => {
                         background: "#fff",
                       }}
                     />
+                    {pdfFrameIssue ? (
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: "20px",
+                          right: "20px",
+                          bottom: "20px",
+                          zIndex: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: "16px",
+                          padding: "14px 16px",
+                          border: "1px solid #d7defe",
+                          borderRadius: "14px",
+                          color: "#264095",
+                          background: "#fff",
+                          boxShadow: "0 10px 30px rgba(38, 64, 149, 0.12)",
+                        }}
+                      >
+                        <span>Preview is taking longer than expected.</span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            window.open(
+                              pdfPreviewUrl,
+                              "_blank",
+                              "noopener,noreferrer",
+                            )
+                          }
+                          style={{
+                            border: "0",
+                            borderRadius: "999px",
+                            padding: "10px 18px",
+                            color: "#fff",
+                            background: "#0b2cff",
+                            fontWeight: 600,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          Open PDF
+                        </button>
+                      </div>
+                    ) : null}
                   </>
                 ) : (
                   <div
