@@ -136,17 +136,17 @@ const PhotoVerification = () => {
     setError("");
   };
 
-  const handleRotate = () => {
+  const handleRotate = (direction) => {
     if (!capturedImage) return;
     const img = new Image();
     img.src = capturedImage;
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      canvas.width = img.width;
-      canvas.height = img.height;
+      canvas.width = img.height; // Swap for 90 degree rotation
+      canvas.height = img.width;
       const ctx = canvas.getContext("2d");
       ctx.translate(canvas.width / 2, canvas.height / 2);
-      ctx.rotate(Math.PI);
+      ctx.rotate(direction === 'left' ? -Math.PI / 2 : Math.PI / 2);
       ctx.drawImage(img, -img.width / 2, -img.height / 2);
       setCapturedImage(canvas.toDataURL("image/jpeg"));
       setError("");
@@ -323,9 +323,19 @@ const PhotoVerification = () => {
                     <button
                       type='button'
                       className='btn btn-warning'
-                      onClick={handleRotate}
+                      onClick={() => handleRotate('left')}
+                      title="Rotate Left"
                     >
-                      Rotate 180°
+                      ⟲
+                    </button>
+
+                    <button
+                      type='button'
+                      className='btn btn-warning'
+                      onClick={() => handleRotate('right')}
+                      title="Rotate Right"
+                    >
+                      ⟳
                     </button>
 
                     <button
