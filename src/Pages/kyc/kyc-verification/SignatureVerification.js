@@ -173,6 +173,8 @@ const SignatureVerification = () => {
     return `${apiBaseUrl}/contact/applications/${applicationId}/pdf`;
   };
 
+  const getPdfDownloadUrl = () => `${getPdfUrl()}?download=1`;
+
   const preparePdfUrl = async () => {
     if (!applicationId) {
       setPdfMessage(
@@ -228,7 +230,7 @@ const SignatureVerification = () => {
       return;
     }
 
-    window.open(pdfResult.url, "_blank", "noopener,noreferrer");
+    window.open(getPdfDownloadUrl(), "_blank", "noopener,noreferrer");
 
     setPdfMessage((prev) =>
       prev && prev.includes("localhost/UAT")
