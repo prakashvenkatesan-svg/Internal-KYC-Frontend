@@ -63,12 +63,12 @@ const PdfDeclarationPopup = ({ id, className }) => {
            </div>
            <ul className="pdf-popup-list">
              <li>
-               <a href="/pdfs/Rights-and-Obligations.pdf" target="_blank" rel="noopener noreferrer">
+               <a href="/pdfs/RIGHTS-AND-OBLIGATIONS-OF-STOCK-BROKERS-Form.pdf" target="_blank" rel="noopener noreferrer">
                  1. Rights and Obligations
                </a>
              </li>
              <li>
-               <a href="/pdfs/Risk-Disclosure-Document-MITC.pdf" target="_blank" rel="noopener noreferrer">
+               <a href="/pdfs/RISK-DISCLOSURE-DOCUMENT-Form.pdf" target="_blank" rel="noopener noreferrer">
                  2. Risk Disclosure Document – MITC
                </a>
              </li>
