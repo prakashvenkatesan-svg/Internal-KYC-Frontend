@@ -19,12 +19,12 @@ const base64ToBlob = (base64, mimeType = "application/pdf") => {
  */
 export const getPdfStepDocument = async (applicationId) => {
   const response = await api.get(
-    `/contact/applications/${applicationId}/pdf`,
-    {
-      responseType: "blob",
-    }
+    `/contact/applications/${applicationId}/pdf`
   );
-  const blob = new Blob([response.data], { type: "application/pdf" });
+  
+  // Extract base64 string depending on API response structure
+  const base64Data = response.data?.data?.pdf_base64 || response.data?.pdf_base64 || response.data?.data || response.data;
+  const blob = base64ToBlob(base64Data, "application/pdf");
   const fileName = `account_opening_${applicationId}.pdf`;
   return { blob, fileName, warnings: [] };
 };

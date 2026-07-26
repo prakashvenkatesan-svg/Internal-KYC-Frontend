@@ -3,6 +3,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import KycStepper from "../../../Components/kyc/KycStepper";
 import api from "../../../services/api";
+import {
+  getPdfStepDocument,
+  getPdfStepMetadata,
+} from "../../../services/pdfStepApi";
 
 const POLL_INTERVAL_MS = 4000;
 const MAX_POLL_ATTEMPTS = 30;
@@ -186,34 +190,26 @@ const SignatureVerification = () => {
 
     try {
       setPdfLoading(true);
+      setPdfMessage("Generating PDF (this might take up to 30 seconds)...");
+
+      // Pre-warm the backend by calling prepare first to prevent 504 timeouts
+      try {
+        await getPdfStepMetadata(applicationId);
+      } catch (e) {
+        // Continue even if metadata fails
+      }
+
+      const result = await getPdfStepDocument(applicationId);
+      
+      if (!result?.blob) {
+         throw new Error("PDF content was empty.");
+      }
+      
       setPdfMessage("");
-
-      // Fetch binary PDF directly with responseType: "blob"
-      const response = await api.get(
-        `/contact/applications/${applicationId}/pdf`,
-        {
-          responseType: "blob",
-          headers: {
-            Accept: "application/pdf"
-          }
-        }
-      );
-
-      const blob = new Blob([response.data], { type: "application/pdf" });
-      const fileName = `account_opening_${applicationId}.pdf`;
-
-      return { blob, fileName };
+      return result;
     } catch (error) {
       let errorMessage = "Unable to generate the PDF preview right now.";
-      if (error.response?.data instanceof Blob) {
-        try {
-          const text = await error.response.data.text();
-          const parsed = JSON.parse(text);
-          errorMessage = parsed.message || errorMessage;
-        } catch (e) {
-          // ignore error parsing
-        }
-      } else if (error.response?.data?.message) {
+      if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       }
       setPdfMessage(errorMessage);
