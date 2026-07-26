@@ -193,6 +193,9 @@ const SignatureVerification = () => {
         `/contact/applications/${applicationId}/pdf`,
         {
           responseType: "blob",
+          headers: {
+            Accept: "application/pdf"
+          }
         }
       );
 
@@ -433,6 +436,7 @@ const SignatureVerification = () => {
               <img
                 src={`${assetBaseUrl}${ddpiDetails.image_url}`}
                 alt={ddpiDetails.stamp_number || "Assigned stamp paper"}
+                onError={(e) => e.target.style.display = 'none'}
                 style={{
                   width: "100%",
                   maxWidth: "480px",
