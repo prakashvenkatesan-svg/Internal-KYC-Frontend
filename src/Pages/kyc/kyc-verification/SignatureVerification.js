@@ -208,10 +208,21 @@ const SignatureVerification = () => {
       setPdfMessage("");
       return result;
     } catch (error) {
+      // Log the full error to the console for debugging
+      console.error("PDF Preview API Error:", error);
+      console.error("Error Response Data:", error.response?.data);
+
       let errorMessage = "Unable to generate the PDF preview right now.";
-      if (error.response?.data?.message) {
+      
+      // Attempt to extract the exact error message from the backend
+      if (typeof error.response?.data === 'string' && error.response.data.includes('Internal Server Error')) {
+        errorMessage = "Internal Server Error - The backend crashed while generating the PDF.";
+      } else if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
       }
+
       setPdfMessage(errorMessage);
       return null;
     } finally {

@@ -78,10 +78,19 @@ const PdfReviewStep = () => {
 
       return { blob: result.blob, fileName: result.fileName };
     } catch (error) {
-      setMessage(
-        error.response?.data?.message ||
-          "Unable to prepare the application PDF right now.",
-      );
+      console.error("PDF Review Step API Error:", error);
+      console.error("Error Response Data:", error.response?.data);
+
+      let errorMessage = "Unable to prepare the application PDF right now.";
+      if (typeof error.response?.data === 'string' && error.response.data.includes('Internal Server Error')) {
+        errorMessage = "Internal Server Error - The backend crashed while generating the PDF.";
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      setMessage(errorMessage);
       return null;
     } finally {
       setLoading(false);
