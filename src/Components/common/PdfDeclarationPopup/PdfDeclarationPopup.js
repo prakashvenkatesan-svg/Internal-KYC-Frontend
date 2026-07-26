@@ -6,23 +6,17 @@ const PdfDeclarationPopup = ({ id, className }) => {
   const timeoutRef = useRef(null);
 
   const handleMouseEnter = () => {
-    if (window.innerWidth >= 992) {
-      clearTimeout(timeoutRef.current);
-      setIsOpen(true);
-    }
+    clearTimeout(timeoutRef.current);
+    setIsOpen(true);
   };
 
   const handleMouseLeave = () => {
-    if (window.innerWidth >= 992) {
-      timeoutRef.current = setTimeout(() => setIsOpen(false), 300);
-    }
+    timeoutRef.current = setTimeout(() => setIsOpen(false), 300);
   };
 
   const handleTouch = (e) => {
-    if (window.innerWidth < 992) {
-      e.preventDefault();
-      setIsOpen(!isOpen);
-    }
+    e.preventDefault();
+    setIsOpen(!isOpen);
   };
 
   const closePopup = (e) => {
@@ -46,6 +40,7 @@ const PdfDeclarationPopup = ({ id, className }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onTouchEnd={handleTouch}
+        onClick={() => setIsOpen(!isOpen)}
       >
         “Rights and Obligations” document(s) and “Risk Disclosure Document” MITC
       </span>
