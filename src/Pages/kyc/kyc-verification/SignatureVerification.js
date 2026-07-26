@@ -94,12 +94,16 @@ const SignatureVerification = () => {
     }
 
     const fallbackTimer = window.setTimeout(() => {
+      console.warn("[PDF_PREVIEW] iframe load timed out", {
+        applicationId,
+        pdfPreviewUrl,
+      });
       setPdfFrameLoading(false);
       setPdfFrameIssue(true);
     }, 12000);
 
     return () => window.clearTimeout(fallbackTimer);
-  }, [pdfFrameLoading, pdfPreviewUrl]);
+  }, [applicationId, pdfFrameLoading, pdfPreviewUrl]);
 
   useEffect(() => {
     if (!applicationId || !hasReturnFromEsign) {
@@ -235,6 +239,10 @@ const SignatureVerification = () => {
 
     setPdfFrameLoading(true);
     setPdfFrameIssue(false);
+    console.info("[PDF_PREVIEW] loading iframe preview", {
+      applicationId,
+      previewUrl: pdfResult.url,
+    });
     setPdfPreviewUrl(pdfResult.url);
     setPdfMessage(
       "Review the full PDF below, then confirm and proceed to eSign.",
@@ -520,10 +528,19 @@ const SignatureVerification = () => {
                       title='Application PDF Preview'
                       src={pdfPreviewUrl}
                       onLoad={() => {
+                        console.info("[PDF_PREVIEW] iframe load event", {
+                          applicationId,
+                          pdfPreviewUrl,
+                        });
                         setPdfFrameLoading(false);
                         setPdfFrameIssue(false);
                       }}
-                      onError={() => {
+                      onError={(error) => {
+                        console.error("[PDF_PREVIEW] iframe error event", {
+                          applicationId,
+                          pdfPreviewUrl,
+                          error,
+                        });
                         setPdfFrameLoading(false);
                         setPdfFrameIssue(true);
                       }}
@@ -555,27 +572,6 @@ const SignatureVerification = () => {
                         }}
                       >
                         <span>Preview is taking longer than expected.</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            window.open(
-                              pdfPreviewUrl,
-                              "_blank",
-                              "noopener,noreferrer",
-                            )
-                          }
-                          style={{
-                            border: "0",
-                            borderRadius: "999px",
-                            padding: "10px 18px",
-                            color: "#fff",
-                            background: "#0b2cff",
-                            fontWeight: 600,
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Open PDF
-                        </button>
                       </div>
                     ) : null}
                   </>
