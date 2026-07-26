@@ -3,10 +3,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import KycStepper from "../../../Components/kyc/KycStepper";
 import api from "../../../services/api";
-import {
-  getPdfStepDocument,
-  getPdfStepMetadata,
-} from "../../../services/pdfStepApi";
 
 const POLL_INTERVAL_MS = 4000;
 const MAX_POLL_ATTEMPTS = 30;
@@ -57,14 +53,6 @@ const SignatureVerification = () => {
 
     setApplicationId(nextApplicationId);
   }, [searchParams]);
-
-  useEffect(() => {
-    return () => {
-      if (pdfPreviewUrl) {
-        window.URL.revokeObjectURL(pdfPreviewUrl);
-      }
-    };
-  }, [pdfPreviewUrl]);
 
   useEffect(() => {
     if (!applicationId) {
@@ -180,7 +168,12 @@ const SignatureVerification = () => {
     };
   }, [applicationId, hasReturnFromEsign]);
 
-  const getPdfResponse = async () => {
+  const getPdfUrl = () => {
+    const apiBaseUrl = String(api.defaults.baseURL || "").replace(/\/+$/, "");
+    return `${apiBaseUrl}/contact/applications/${applicationId}/pdf`;
+  };
+
+  const preparePdfUrl = async () => {
     if (!applicationId) {
       setPdfMessage(
         "Application ID not found. Please resume the application again.",
@@ -190,23 +183,10 @@ const SignatureVerification = () => {
 
     try {
       setPdfLoading(true);
-      setPdfMessage("Generating PDF (this might take up to 30 seconds)...");
-
-      // Pre-warm the backend by calling prepare first to prevent 504 timeouts
-      try {
-        await getPdfStepMetadata(applicationId);
-      } catch (e) {
-        // Continue even if metadata fails
-      }
-
-      const result = await getPdfStepDocument(applicationId);
-      
-      if (!result?.blob) {
-         throw new Error("PDF content was empty.");
-      }
-      
       setPdfMessage("");
-      return result;
+      const fileName = `account_opening_${applicationId}.pdf`;
+
+      return { url: getPdfUrl(), fileName };
     } catch (error) {
       // Log the full error to the console for debugging
       console.error("PDF Preview API Error:", error);
@@ -231,38 +211,24 @@ const SignatureVerification = () => {
   };
 
   const previewPdf = async () => {
-    const pdfResult = await getPdfResponse();
+    const pdfResult = await preparePdfUrl();
     if (!pdfResult) {
       return;
     }
 
-    const previewUrl = window.URL.createObjectURL(pdfResult.blob);
-
-    if (pdfPreviewUrl) {
-      window.URL.revokeObjectURL(pdfPreviewUrl);
-    }
-
-    setPdfPreviewUrl(previewUrl);
+    setPdfPreviewUrl(pdfResult.url);
     setPdfMessage(
       "Review the full PDF below, then confirm and proceed to eSign.",
     );
   };
 
   const downloadPdf = async () => {
-    const pdfResult = await getPdfResponse();
+    const pdfResult = await preparePdfUrl();
     if (!pdfResult) {
       return;
     }
 
-    const downloadUrl = window.URL.createObjectURL(pdfResult.blob);
-    const link = document.createElement("a");
-
-    link.href = downloadUrl;
-    link.download = pdfResult.fileName;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(downloadUrl);
+    window.open(pdfResult.url, "_blank", "noopener,noreferrer");
 
     setPdfMessage((prev) =>
       prev && prev.includes("localhost/UAT")
