@@ -72,7 +72,7 @@ import SignatureVerification from "./Pages/kyc/kyc-verification/SignatureVerific
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Chatbot from "./Components/chatbot/Chatbot";
+// import Chatbot from "./Components/chatbot/Chatbot";
 
 const resourcesHashRedirects = {
   "#find-complaint": "/investor#complaint-procedure",
@@ -250,7 +250,7 @@ const Layout = () => {
           }
         />
       </Routes>
-      <Chatbot />
+      {/* <Chatbot /> */}
       <AccessibilityManager />
       {!hideFooter && (
         <>
