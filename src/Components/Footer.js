@@ -271,6 +271,17 @@ const Footer = () => {
                   NSDL e-voting
                 </a>
               </li>
+
+              <li>
+                <a
+                  href='https://dashboard.aionioncapital.com'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='footer-link'
+                >
+                  Employee Login
+                </a>
+              </li>
             </ul>
           </div>
         </div>
