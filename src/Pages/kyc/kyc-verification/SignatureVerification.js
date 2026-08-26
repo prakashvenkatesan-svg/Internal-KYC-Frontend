@@ -390,6 +390,17 @@ const SignatureVerification = () => {
     previewPdf();
   }, [applicationId, hasReturnFromEsign, isCompleted]);
 
+  // Auto-redirect to KYC Complete screen after a 10-second delay
+  useEffect(() => {
+    if (isCompleted) {
+      const redirectTimer = window.setTimeout(() => {
+        navigate("/kyc-complete");
+      }, 10000); // 10 seconds
+
+      return () => window.clearTimeout(redirectTimer);
+    }
+  }, [isCompleted, navigate]);
+
   return (
     <div className='container'>
       <KycStepper

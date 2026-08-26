@@ -139,9 +139,11 @@ const PdfReviewStep = () => {
   };
 
   useEffect(() => {
-    loadMetadata();
-    previewPdf();
-  }, []);
+    if (applicationId) {
+      localStorage.setItem(buildConfirmationKey(applicationId), "true");
+      navigate("/esign/start");
+    }
+  }, [applicationId, navigate]);
 
   return (
     <div className='container'>
