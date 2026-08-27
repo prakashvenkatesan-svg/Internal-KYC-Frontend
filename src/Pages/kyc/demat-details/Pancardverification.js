@@ -659,8 +659,26 @@ const Pancardverification = () => {
 
       localStorage.setItem("panNumber", cleanedPan);
 
+      let applicationId = localStorage.getItem("application_id");
+
+      if (!applicationId) {
+        setErrors((previous) => ({
+          ...previous,
+          general: "Application ID is missing. Please restart the KYC process.",
+        }));
+        setLoading(false);
+        return;
+      }
+
+      // Upload file / captured image into backend uploads/pancardimage FIRST
+      await uploadPanCard({
+        applicationId,
+        panNumber: cleanedPan,
+        dateOfBirth: dobIso,
+      });
+
       const verifyResponse = await api.post("/identify/verify-pan", {
-        application_id: localStorage.getItem("application_id"),
+        application_id: applicationId,
         pan_number: cleanedPan,
         dob: dobIso,
       });
@@ -670,7 +688,8 @@ const Pancardverification = () => {
       console.log("VERIFY PAN RESPONSE:", result);
 
       if (result?.application_id) {
-        localStorage.setItem("application_id", String(result.application_id));
+        applicationId = String(result.application_id);
+        localStorage.setItem("application_id", applicationId);
       }
 
       if (!result?.success) {
@@ -687,25 +706,6 @@ const Pancardverification = () => {
         setShowExistingPopup(true);
         return;
       }
-
-      const applicationId =
-        result?.application_id || localStorage.getItem("application_id");
-
-      if (!applicationId) {
-        setErrors((previous) => ({
-          ...previous,
-          general: "Application ID is missing. Please restart the KYC process.",
-        }));
-
-        return;
-      }
-
-      // Upload file / captured image into backend uploads/pancardimage
-      await uploadPanCard({
-        applicationId,
-        panNumber: cleanedPan,
-        dateOfBirth: dobIso,
-      });
 
       /*
        * KRA FLOW
