@@ -108,7 +108,15 @@ const Numberotp = () => {
 
       toast.success("Mobile number verified successfully");
       
-      const nextRoute = response.data?.data?.next_step || "/emailverify";
+      const stepRoutes = {
+        email_registration: "/emailverify",
+        emailverify: "/emailverify",
+        email_otp: "/emailotp",
+      };
+      const nextStep = response.data?.data?.next_step;
+      const nextRoute =
+        stepRoutes[nextStep] ||
+        (nextStep?.startsWith("/") ? nextStep : "/emailverify");
 
       navigate(nextRoute, {
         state: {
