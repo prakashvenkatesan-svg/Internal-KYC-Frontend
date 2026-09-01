@@ -54,49 +54,29 @@ const teambranch = [
     address: [
       "Reg. Office: 3rd Floor, Meerlan Towers,",
       "No. 33 Hanumantha Road, Royapettah,",
-      "Chennai - 600 014,",
-      "Tamil Nadu",
+      "Chennai - 600 014",
       "Ph: 044-46895225",
     ],
   },
-
   {
     city: "COIMBATORE",
     address: [
-      "Grand CAG Central, 3rd Floor, NAVA INDIA,",
-      "110, Avinashi Rd, Peelamedu,",
-      "Coimbatore - 641037,",
-      "Tamil Nadu ",
+      "Grand CAG Central, 3rd Floor , NAVA INDIA, 110, Avinashi Rd, Peelamedu, Coimbatore, Tamil Nadu 641037",
     ],
   },
-
   {
     city: "TRICHY",
     address: [
       "ANSHIL ARCADE, 2nd Floor,",
-      "Old No. 11, New No. 39 (Plot No. 660),",
-      "EVR Salai, K.K. Nagar,",
-      "Tiruchirappalli - 620 021,",
-      "Tamil Nadu",
+      "Old No.11, New No.39 (Plot No.660),",
+      "EVR Salai, K.K.Nagar,",
+      "Tiruchirappalli - 620 021",
     ],
   },
-
   {
     city: "MADURAI",
     address: [
-      "70, Navalar Nagar 3rd St,",
-      "Sakthi Velammal Nagar, S S Colony,",
-      "Madurai - 625016,",
-      "Tamil Nadu",
-    ],
-  },
-  {
-    city: "NAMAKKAL",
-    address: [
-      "Door No: 341/113A1, 1st Floor,",
-      "S.P. Pudur Main Road, Paramathi Rd,",
-      "Namakkal - 637001,",
-      "Tamil Nadu",
+      "70, Navalar Nagar 3rd St, Sakthi Velammal Nagar, S S Colony, Madurai, Tamil Nadu 625016",
     ],
   },
   {
@@ -105,8 +85,13 @@ const teambranch = [
       "2062, 1st Floor,",
       "23rd Main Rd, Vanganahalli,",
       "1st Sector, HSR Layout,",
-      "Bengaluru - 560102,",
-      "Karnataka",
+      "Bengaluru, Karnataka 560102",
+    ],
+  },
+  {
+    city: "NAMAKKAL",
+    address: [
+      "Door No: 341/113A1, 1st Floor S.P. Pudur Main Road, Paramathi Rd, Namakkal, Tamil Nadu 637001",
     ],
   },
 ];
@@ -376,29 +361,29 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="about-Section">
-  <div className="container">
-    <h2 className="text-center branch-heading">
-      Our Branch Address
-    </h2>
+      <div className='about-Section'>
+        <div className='container mt-5'>
+          <h3 className='mb-4 text-center branch-heading'>
+            Our Branch Address
+          </h3>
 
-    <div className="row">
-      {teambranch.map((branch, index) => (
-        <div className="col-lg-4 col-md-6 mb-4" key={index}>
-          <div className="About-card h-100">
-            <h4>{branch.city}</h4>
+          <div className='row'>
+            {teambranch.map((branch, index) => (
+              <div className='col-lg-4 col-md-6 mb-4' key={index}>
+                <div className='About-card h-100'>
+                  <h4>{branch.city}</h4>
 
-            <div className="address-text">
-              {branch.address.map((line, i) => (
-                <span key={i}>{line}</span>
-              ))}
-            </div>
+                  <div className='address-text'>
+                    {branch.address.map((line, i) => (
+                      <span key={i}>{line}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
+      </div>
     </div>
   );
 };
