@@ -754,7 +754,7 @@ const Pancardverification = () => {
         if (result?.incomeTaxVerified && result?.itdData) {
           navigate("/income-details", {
             state: {
-              incomeTaxData: { data: result.itdData },
+              incomeTaxData: result.itdData,
               pan_number: cleanedPan,
               dob: formData.dob,
               reason: "KRA_CONTACT_MISMATCH",
@@ -783,7 +783,7 @@ const Pancardverification = () => {
       if (result?.incomeTaxVerified) {
         navigate("/income-details", {
           state: {
-            incomeTaxData: result.data ? { data: result.data } : (result.itdData ? { data: result.itdData } : result),
+            incomeTaxData: result.itdData || result.data,
             pan_number: cleanedPan,
             dob: formData.dob,
           },
