@@ -84,51 +84,51 @@ const PhotoVerification = () => {
 
   // CAPTURE PHOTO
   const capturePhoto = async () => {
-  const imageSrc = webcamRef.current?.getScreenshot();
+    const imageSrc = webcamRef.current?.getScreenshot();
 
-  if (!imageSrc) {
-    setError("Unable to capture photo");
-    return;
-  }
+    if (!imageSrc) {
+      setError("Unable to capture photo");
+      return;
+    }
 
-  const img = new Image();
+    const img = new Image();
 
-  img.src = imageSrc;
+    img.src = imageSrc;
 
-  await new Promise((resolve) => {
-    img.onload = resolve;
-  });
+    await new Promise((resolve) => {
+      img.onload = resolve;
+    });
 
-  const detections = await faceapi.detectAllFaces(
-    img,
-    new faceapi.TinyFaceDetectorOptions()
-  ).withFaceLandmarks(true);
+    const detections = await faceapi.detectAllFaces(
+      img,
+      new faceapi.TinyFaceDetectorOptions()
+    ).withFaceLandmarks(true);
 
-  if (detections.length === 0) {
-    setError("No human face detected.");
-    return;
-  }
+    if (detections.length === 0) {
+      setError("No human face detected.");
+      return;
+    }
 
-  if (detections.length > 1) {
-    setError("Multiple faces detected. Please ensure only one person is visible.");
-    return;
-  }
+    if (detections.length > 1) {
+      setError("Multiple faces detected. Please ensure only one person is visible.");
+      return;
+    }
 
-  const landmarks = detections[0].landmarks;
-  const leftEyeY = landmarks.getLeftEye()[0].y;
-  const rightEyeY = landmarks.getRightEye()[0].y;
-  const mouthY = landmarks.getMouth()[0].y;
-  const avgEyeY = (leftEyeY + rightEyeY) / 2;
+    const landmarks = detections[0].landmarks;
+    const leftEyeY = landmarks.getLeftEye()[0].y;
+    const rightEyeY = landmarks.getRightEye()[0].y;
+    const mouthY = landmarks.getMouth()[0].y;
+    const avgEyeY = (leftEyeY + rightEyeY) / 2;
 
-  if (avgEyeY > mouthY) {
-    setError("Face appears upside down. If the preview is inverted, use the Rotate button.");
-  } else {
-    setError("");
-  }
+    if (avgEyeY > mouthY) {
+      setError("Face appears upside down. If the preview is inverted, use the Rotate button.");
+    } else {
+      setError("");
+    }
 
-  setCapturedImage(imageSrc);
-  setCameraOpen(false);
-};
+    setCapturedImage(imageSrc);
+    setCameraOpen(false);
+  };
 
   const cancelPhoto = () => {
     setCameraOpen(false);
@@ -187,7 +187,7 @@ const PhotoVerification = () => {
       if (tokenFromUrl && !localStorage.getItem("application_id")) {
         setSharedSuccess(true);
       } else {
-        navigate("/uploadsignature");
+        navigate("/esign");
       }
     } catch (error) {
       console.log("PHOTO UPLOAD ERROR:", error.response?.data || error.message);
@@ -206,7 +206,7 @@ const PhotoVerification = () => {
       />
 
       {validatingToken && <div className='alert alert-info mt-3'>Validating secure link...</div>}
-      
+
       {sharedSuccess ? (
         <div className='row mt-5 text-center'>
           <div className='col-12'>
@@ -215,147 +215,147 @@ const PhotoVerification = () => {
           </div>
         </div>
       ) : (
-      <div className='row'>
-        {/* LEFT COLUMN */}
-        <div className='col-lg-6 d-flex justify-content-center'>
-          <div className='face-card'>
-            <h5>For KYC verification Please take Live Photo </h5>
-            <div className='scan-box'>
-              <div className='corner top-left'></div>
-              <div className='corner top-right'></div>
-              <div className='corner bottom-left'></div>
-              <div className='corner bottom-right'></div>
+        <div className='row'>
+          {/* LEFT COLUMN */}
+          <div className='col-lg-6 d-flex justify-content-center'>
+            <div className='face-card'>
+              <h5>For KYC verification Please take Live Photo </h5>
+              <div className='scan-box'>
+                <div className='corner top-left'></div>
+                <div className='corner top-right'></div>
+                <div className='corner bottom-left'></div>
+                <div className='corner bottom-right'></div>
 
-              <div className='user-icon'>
-                <div className='head'></div>
-                <div className='body'></div>
+                <div className='user-icon'>
+                  <div className='head'></div>
+                  <div className='body'></div>
+                </div>
               </div>
-            </div>
 
-            <div className='Instruction-card'>
-              <ul>
-                <li>
-                  Face Forward and make sure your face is clearly visible.
-                </li>
-                <li>Remove your glasses, if necessary.</li>
-              </ul>
-            </div>
+              <div className='Instruction-card'>
+                <ul>
+                  <li>
+                    Face Forward and make sure your face is clearly visible.
+                  </li>
+                  <li>Remove your glasses, if necessary.</li>
+                </ul>
+              </div>
 
-            {/* OPEN CAMERA BUTTON */}
-            {!cameraOpen && !capturedImage && !validatingToken && !tokenError && (
-              <div className='d-flex justify-content-center mt-3'>
-                <button
-                  type='button'
-                  className='btn btn-primary'
-                  onClick={openCamera}
-                >
-                  Open Camera
-                </button>
+              {/* OPEN CAMERA BUTTON */}
+              {!cameraOpen && !capturedImage && !validatingToken && !tokenError && (
+                <div className='d-flex justify-content-center mt-3'>
+                  <button
+                    type='button'
+                    className='btn btn-primary'
+                    onClick={openCamera}
+                  >
+                    Open Camera
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className='col-lg-6 d-flex justify-content-center'>
+            {(cameraOpen || capturedImage || error) && (
+              <div className='face-result-card'>
+                {/* CAMERA VIEW */}
+                {cameraOpen && !capturedImage && (
+                  <>
+                    <div className='mt-4'>
+                      <Webcam
+                        ref={webcamRef}
+                        audio={false}
+                        screenshotFormat='image/jpeg'
+                        width={400}
+                        height={300}
+                        mirrored={true}
+                        videoConstraints={{
+                          width: 400,
+                          height: 300,
+                          facingMode: "user",
+                        }}
+                        onUserMedia={() => {
+                          console.log("Camera opened");
+                        }}
+                        onUserMediaError={(error) => {
+                          console.log("Camera error:", error);
+                          setError("Unable to access camera");
+                        }}
+                      />
+                    </div>
+
+                    {/* CAPTURE / CANCEL ONLY WHEN CAMERA OPEN */}
+                    <div className='d-flex justify-content-center gap-3 mt-3'>
+                      <button
+                        type='button'
+                        className='btn btn-success'
+                        onClick={capturePhoto}
+                      >
+                        Capture
+                      </button>
+
+                      <button
+                        type='button'
+                        className='btn btn-secondary'
+                        onClick={cancelPhoto}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {/* PREVIEW AFTER CAPTURE */}
+                {capturedImage && !cameraOpen && (
+                  <div className='mt-4 text-center'>
+                    <img src={capturedImage} alt='Captured' width='300' />
+
+                    <div className='mt-3 d-flex justify-content-center gap-3'>
+                      <button
+                        type='button'
+                        className='btn btn-secondary'
+                        onClick={cancelPhoto}
+                      >
+                        Retake
+                      </button>
+
+                      <button
+                        type='button'
+                        className='btn btn-warning'
+                        onClick={() => handleRotate('left')}
+                        title="Rotate Left"
+                      >
+                        ⟲
+                      </button>
+
+                      <button
+                        type='button'
+                        className='btn btn-warning'
+                        onClick={() => handleRotate('right')}
+                        title="Rotate Right"
+                      >
+                        ⟳
+                      </button>
+
+                      <button
+                        type='button'
+                        className='btn btn-success'
+                        onClick={handleContinue}
+                        disabled={loading}
+                      >
+                        {loading ? "Uploading..." : "Continue"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* ERROR */}
+                {error && <p className='text-danger mt-3'>{error}</p>}
               </div>
             )}
           </div>
         </div>
-
-        <div className='col-lg-6 d-flex justify-content-center'>
-          {(cameraOpen || capturedImage || error) && (
-            <div className='face-result-card'>
-              {/* CAMERA VIEW */}
-              {cameraOpen && !capturedImage && (
-                <>
-                  <div className='mt-4'>
-                    <Webcam
-                      ref={webcamRef}
-                      audio={false}
-                      screenshotFormat='image/jpeg'
-                      width={400}
-                      height={300}
-                      mirrored={true}
-                      videoConstraints={{
-                        width: 400,
-                        height: 300,
-                        facingMode: "user",
-                      }}
-                      onUserMedia={() => {
-                        console.log("Camera opened");
-                      }}
-                      onUserMediaError={(error) => {
-                        console.log("Camera error:", error);
-                        setError("Unable to access camera");
-                      }}
-                    />
-                  </div>
-
-                  {/* CAPTURE / CANCEL ONLY WHEN CAMERA OPEN */}
-                  <div className='d-flex justify-content-center gap-3 mt-3'>
-                    <button
-                      type='button'
-                      className='btn btn-success'
-                      onClick={capturePhoto}
-                    >
-                      Capture
-                    </button>
-
-                    <button
-                      type='button'
-                      className='btn btn-secondary'
-                      onClick={cancelPhoto}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {/* PREVIEW AFTER CAPTURE */}
-              {capturedImage && !cameraOpen && (
-                <div className='mt-4 text-center'>
-                  <img src={capturedImage} alt='Captured' width='300' />
-
-                  <div className='mt-3 d-flex justify-content-center gap-3'>
-                    <button
-                      type='button'
-                      className='btn btn-secondary'
-                      onClick={cancelPhoto}
-                    >
-                      Retake
-                    </button>
-
-                    <button
-                      type='button'
-                      className='btn btn-warning'
-                      onClick={() => handleRotate('left')}
-                      title="Rotate Left"
-                    >
-                      ⟲
-                    </button>
-
-                    <button
-                      type='button'
-                      className='btn btn-warning'
-                      onClick={() => handleRotate('right')}
-                      title="Rotate Right"
-                    >
-                      ⟳
-                    </button>
-
-                    <button
-                      type='button'
-                      className='btn btn-success'
-                      onClick={handleContinue}
-                      disabled={loading}
-                    >
-                      {loading ? "Uploading..." : "Continue"}
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* ERROR */}
-              {error && <p className='text-danger mt-3'>{error}</p>}
-            </div>
-          )}
-        </div>
-      </div>
       )}
     </div>
   );

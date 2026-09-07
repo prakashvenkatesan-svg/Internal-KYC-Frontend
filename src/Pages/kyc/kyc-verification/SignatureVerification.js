@@ -26,8 +26,7 @@ const SignatureVerification = () => {
   const [pdfFrameLoading, setPdfFrameLoading] = useState(false);
   const [pdfFrameIssue, setPdfFrameIssue] = useState(false);
   const [message, setMessage] = useState("");
-  const [pdfMessage, setPdfMessage] = useState("");
-  const [pdfPreviewUrl, setPdfPreviewUrl] = useState("");
+  const [hasAutoStartedEsign, setHasAutoStartedEsign] = useState(false);
   const [esignStatus, setEsignStatus] = useState("");
   const [providerStatus, setProviderStatus] = useState("");
   const [signedPdfUrl, setSignedPdfUrl] = useState("");
@@ -88,22 +87,7 @@ const SignatureVerification = () => {
     };
   }, [applicationId]);
 
-  useEffect(() => {
-    if (!pdfFrameLoading || !pdfPreviewUrl) {
-      return undefined;
-    }
-
-    const fallbackTimer = window.setTimeout(() => {
-      console.warn("[PDF_PREVIEW] iframe load timed out", {
-        applicationId,
-        pdfPreviewUrl,
-      });
-      setPdfFrameLoading(false);
-      setPdfFrameIssue(true);
-    }, 12000);
-
-    return () => window.clearTimeout(fallbackTimer);
-  }, [applicationId, pdfFrameLoading, pdfPreviewUrl]);
+  // Removed PDF frame timeout logic as PDF preview is skipped
 
   useEffect(() => {
     if (!applicationId || !hasReturnFromEsign) {
@@ -187,82 +171,7 @@ const SignatureVerification = () => {
     };
   }, [applicationId, hasReturnFromEsign]);
 
-  const getPdfUrl = () => {
-    const apiBaseUrl = String(api.defaults.baseURL || "").replace(/\/+$/, "");
-    return `${apiBaseUrl}/contact/applications/${applicationId}/pdf`;
-  };
-
-  const getPdfDownloadUrl = () => `${getPdfUrl()}?download=1`;
-
-  const preparePdfUrl = async () => {
-    if (!applicationId) {
-      setPdfMessage(
-        "Application ID not found. Please resume the application again.",
-      );
-      return null;
-    }
-
-    try {
-      setPdfLoading(true);
-      setPdfMessage("");
-      const fileName = `account_opening_${applicationId}.pdf`;
-
-      return { url: getPdfUrl(), fileName };
-    } catch (error) {
-      // Log the full error to the console for debugging
-      console.error("PDF Preview API Error:", error);
-      console.error("Error Response Data:", error.response?.data);
-
-      let errorMessage = "Unable to generate the PDF preview right now.";
-      
-      // Attempt to extract the exact error message from the backend
-      if (typeof error.response?.data === 'string' && error.response.data.includes('Internal Server Error')) {
-        errorMessage = "Internal Server Error - The backend crashed while generating the PDF.";
-      } else if (error.response?.data?.message) {
-        errorMessage = error.response.data.message;
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
-
-      setPdfMessage(errorMessage);
-      return null;
-    } finally {
-      setPdfLoading(false);
-    }
-  };
-
-  const previewPdf = async () => {
-    const pdfResult = await preparePdfUrl();
-    if (!pdfResult) {
-      return;
-    }
-
-    setPdfFrameLoading(true);
-    setPdfFrameIssue(false);
-    console.info("[PDF_PREVIEW] loading iframe preview", {
-      applicationId,
-      previewUrl: pdfResult.url,
-    });
-    setPdfPreviewUrl(pdfResult.url);
-    setPdfMessage(
-      "Review the full PDF below, then confirm and proceed to eSign.",
-    );
-  };
-
-  const downloadPdf = async () => {
-    const pdfResult = await preparePdfUrl();
-    if (!pdfResult) {
-      return;
-    }
-
-    window.open(getPdfDownloadUrl(), "_blank", "noopener,noreferrer");
-
-    setPdfMessage((prev) =>
-      prev && prev.includes("localhost/UAT")
-        ? prev
-        : "PDF downloaded successfully.",
-    );
-  };
+  // Removed preparePdfUrl, previewPdf, and downloadPdf as PDF preview is bypassed
 
   const handleStartEsign = async () => {
     try {
@@ -383,12 +292,13 @@ const SignatureVerification = () => {
   };
 
   useEffect(() => {
-    if (!applicationId || hasReturnFromEsign || isCompleted) {
+    if (!applicationId || hasReturnFromEsign || isCompleted || hasAutoStartedEsign) {
       return;
     }
 
-    previewPdf();
-  }, [applicationId, hasReturnFromEsign, isCompleted]);
+    setHasAutoStartedEsign(true);
+    handleStartEsign();
+  }, [applicationId, hasReturnFromEsign, isCompleted, hasAutoStartedEsign]);
 
   // Auto-redirect to KYC Complete screen after a 10-second delay
   useEffect(() => {
@@ -409,10 +319,11 @@ const SignatureVerification = () => {
       />
 
       <div className=''>
-        <p>
-          Review your generated application PDF below, then proceed to the final
-          eSign step to complete onboarding.
-        </p>
+        {!isCompleted && !hasReturnFromEsign && !message ? (
+          <p>
+            Please wait while we redirect you to the final eSign step...
+          </p>
+        ) : null}
 
         {ddpiDetails?.ddpi_selected ? (
           <div
@@ -464,11 +375,7 @@ const SignatureVerification = () => {
           </div>
         ) : null}
 
-        {pdfMessage ? (
-          <p className='mt-3' style={{ color: "#264095" }}>
-            {pdfMessage}
-          </p>
-        ) : null}
+
 
         {message ? (
           <p className='mt-3' style={{ color: "#264095" }}>
@@ -483,155 +390,35 @@ const SignatureVerification = () => {
         ) : null}
 
         {!isCompleted && !hasReturnFromEsign ? (
-          <>
-            <div
-              style={{
-                marginTop: "24px",
-                border: "1px solid #d7defe",
-                borderRadius: "20px",
-                background: "#f8faff",
-                overflow: "hidden",
-              }}
-            >
-              <div
-                style={{
-                  padding: "16px 20px",
-                  borderBottom: "1px solid #d7defe",
-                  color: "#264095",
-                  fontWeight: 600,
-                }}
-              >
-                Application PDF Review
+          <div style={{ marginTop: "40px", textAlign: "center" }}>
+            {loading ? (
+              <div className="d-flex flex-column align-items-center">
+                <div className="spinner-border text-primary mb-3" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                <h5 style={{ color: "#264095" }}>Preparing eSign...</h5>
+                <p className="text-muted">You will be redirected shortly.</p>
               </div>
-
-              <div
+            ) : (
+              <button
+                type='button'
+                className='submit-btn'
                 style={{
-                  height: "70vh",
-                  minHeight: "540px",
-                  background: "#eef3ff",
-                  position: "relative",
+                  width: "auto",
+                  minWidth: "320px",
+                  maxWidth: "480px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
                 }}
+                onClick={handleStartEsign}
+                disabled={loading || statusLoading}
               >
-                {pdfPreviewUrl ? (
-                  <>
-                    {pdfFrameLoading ? (
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          zIndex: 1,
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "10px",
-                          color: "#264095",
-                          background: "#eef3ff",
-                        }}
-                      >
-                        <div className="spinner-border text-primary" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <span>Loading PDF preview...</span>
-                      </div>
-                    ) : null}
-                    <iframe
-                      title='Application PDF Preview'
-                      src={pdfPreviewUrl}
-                      onLoad={() => {
-                        console.info("[PDF_PREVIEW] iframe load event", {
-                          applicationId,
-                          pdfPreviewUrl,
-                        });
-                        setPdfFrameLoading(false);
-                        setPdfFrameIssue(false);
-                      }}
-                      onError={(error) => {
-                        console.error("[PDF_PREVIEW] iframe error event", {
-                          applicationId,
-                          pdfPreviewUrl,
-                          error,
-                        });
-                        setPdfFrameLoading(false);
-                        setPdfFrameIssue(true);
-                      }}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        border: "0",
-                        background: "#fff",
-                      }}
-                    />
-                    {pdfFrameIssue ? (
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "20px",
-                          right: "20px",
-                          bottom: "20px",
-                          zIndex: 2,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: "16px",
-                          padding: "14px 16px",
-                          border: "1px solid #d7defe",
-                          borderRadius: "14px",
-                          color: "#264095",
-                          background: "#fff",
-                          boxShadow: "0 10px 30px rgba(38, 64, 149, 0.12)",
-                        }}
-                      >
-                        <span>Preview is taking longer than expected.</span>
-                      </div>
-                    ) : null}
-                  </>
-                ) : (
-                  <div
-                    style={{
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#264095",
-                      padding: "24px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {pdfLoading ? (
-                      <div className="d-flex flex-column align-items-center">
-                        <div className="spinner-border text-primary mb-2" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                        <span>Preparing PDF preview...</span>
-                      </div>
-                    ) : (
-                      "PDF preview will appear here."
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <button
-              type='button'
-              className='submit-btn'
-              style={{
-                marginTop: "35px",
-                width: "auto",
-                minWidth: "320px",
-                maxWidth: "480px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                paddingLeft: "32px",
-                paddingRight: "32px",
-              }}
-              onClick={handleStartEsign}
-              disabled={loading || statusLoading || pdfLoading}
-            >
-              {loading ? "Preparing eSign..." : "Confirm and Proceed to eSign"}
-            </button>
-          </>
+                Start eSign
+              </button>
+            )}
+          </div>
         ) : null}
 
         {isCheckingReturnedEsign ? (
