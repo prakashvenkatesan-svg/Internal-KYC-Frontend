@@ -61,6 +61,9 @@ const IncomeTaxDetails = () => {
 
         provider: "digilocker",
         provider_ref: requestId,
+        verification_reason: location.state?.reason || "INCOME_TAX_ONLY",
+        mobile_matched: location.state?.contactVerification?.mobileMatched ?? false,
+        email_matched: location.state?.contactVerification?.emailMatched ?? false,
       });
 
       console.log("DIGILOCKER INITIAL DATA SAVED");

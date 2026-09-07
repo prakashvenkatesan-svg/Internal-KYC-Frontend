@@ -750,6 +750,23 @@ const Pancardverification = () => {
 
         localStorage.setItem("digilocker_flow_reason", "KRA_CONTACT_MISMATCH");
 
+        // Use ITD screen if ITD was verified by backend
+        if (result?.incomeTaxVerified && result?.itdData) {
+          navigate("/income-details", {
+            state: {
+              incomeTaxData: { data: result.itdData },
+              pan_number: cleanedPan,
+              dob: formData.dob,
+              reason: "KRA_CONTACT_MISMATCH",
+              contactVerification: {
+                mobileMatched,
+                emailMatched,
+              },
+            },
+          });
+          return;
+        }
+
         await redirectToDigiLocker({
           applicationId,
           panNumber: cleanedPan,
@@ -766,7 +783,7 @@ const Pancardverification = () => {
       if (result?.incomeTaxVerified) {
         navigate("/income-details", {
           state: {
-            incomeTaxData: result.data,
+            incomeTaxData: result.data ? { data: result.data } : (result.itdData ? { data: result.itdData } : result),
             pan_number: cleanedPan,
             dob: formData.dob,
           },
