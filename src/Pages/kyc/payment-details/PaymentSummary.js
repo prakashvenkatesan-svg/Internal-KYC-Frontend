@@ -292,15 +292,7 @@ const PaymentSummary = () => {
                 {processing ? "Processing..." : "Proceed to Pay"}
               </button>
 
-              <button
-                type='button'
-                className='payment-proceed-btn'
-                style={{ background: "#64748b", borderColor: "#64748b" }}
-                onClick={handleSkipPayment}
-                disabled={processing}
-              >
-                Skip Payment (Test Mode)
-              </button>
+              {/* Skip Payment (Test Mode) removed for production */}
             </div>
           </div>
         </div>
