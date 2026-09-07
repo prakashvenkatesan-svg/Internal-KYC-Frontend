@@ -720,8 +720,8 @@ const SignatureUpload = () => {
   return (
     <div className="container">
       <KycStepper
-        currentStep="complete"
-        completedSteps={["contact", "identify", "personal", "scheme"]}
+        currentStep="personal"
+        completedSteps={["contact", "identify"]}
       />
 
       <div className="row signature-upload-row">

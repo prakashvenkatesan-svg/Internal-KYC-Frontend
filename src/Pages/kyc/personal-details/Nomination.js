@@ -757,7 +757,7 @@ const parseDisplayDob = (value) => {
           const response = await api.post("/nominees/save", payload);
 
           if (response.data?.success) {
-            navigate("/photoverify");
+            navigate("/uploadsignature");
             return;
           }
 

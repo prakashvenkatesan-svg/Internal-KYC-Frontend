@@ -159,6 +159,29 @@ const PaymentSummary = () => {
     }
   };
 
+  // ---- SKIP PAYMENT HANDLER (FOR LOCAL TESTING) ----
+  const handleSkipPayment = async () => {
+    if (processing) return;
+    setProcessing(true);
+
+    try {
+      const applicationId = localStorage.getItem("application_id");
+      const res = await api.post("/payment/skip", { application_id: Number(applicationId) });
+
+      if (res.data.success) {
+        toast.success("Payment skipped successfully (Test Mode)");
+        window.location.href = "/payment-completed";
+      } else {
+        toast.error(res.data.message || "Failed to skip payment");
+        setProcessing(false);
+      }
+    } catch (err) {
+      console.error("SKIP PAYMENT ERROR:", err.response?.data || err.message);
+      toast.error("Error skipping payment.");
+      setProcessing(false);
+    }
+  };
+
   return (
     <div className='container'>
       <KycStepper
@@ -259,14 +282,26 @@ const PaymentSummary = () => {
             <hr />
 
             {/* BUTTON */}
-            <button
-              type='button'
-              className='payment-proceed-btn'
-              onClick={handlePayment}
-              disabled={processing || bankLoading || !!bankError}
-            >
-              {processing ? "Processing..." : "Proceed to Pay"}
-            </button>
+            <div className='d-flex flex-column gap-3'>
+              <button
+                type='button'
+                className='payment-proceed-btn'
+                onClick={handlePayment}
+                disabled={processing || bankLoading || !!bankError}
+              >
+                {processing ? "Processing..." : "Proceed to Pay"}
+              </button>
+
+              <button
+                type='button'
+                className='payment-proceed-btn'
+                style={{ background: "#64748b", borderColor: "#64748b" }}
+                onClick={handleSkipPayment}
+                disabled={processing}
+              >
+                Skip Payment (Test Mode)
+              </button>
+            </div>
           </div>
         </div>
       </div>

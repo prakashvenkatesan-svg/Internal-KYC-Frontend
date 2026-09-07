@@ -131,7 +131,7 @@ const Percentageallocation = () => {
       const response = await api.post("/nominees/allocation", payload);
 
       if (response.data?.success) {
-        navigate("/photoverify");
+        navigate("/uploadsignature");
       } else {
         setGeneralError(response.data?.message || "Failed to save allocation");
       }

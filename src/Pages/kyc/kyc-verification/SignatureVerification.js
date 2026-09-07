@@ -325,55 +325,7 @@ const SignatureVerification = () => {
           </p>
         ) : null}
 
-        {ddpiDetails?.ddpi_selected ? (
-          <div
-            style={{
-              marginTop: "24px",
-              border: "1px solid #d7defe",
-              borderRadius: "20px",
-              background: "#f8faff",
-              padding: "20px",
-            }}
-          >
-            <h4 style={{ color: "#264095", marginBottom: "8px" }}>
-              DDPI Stamp Paper Review
-            </h4>
-            <p style={{ marginBottom: "8px" }}>
-              <strong>Stamp paper assigned successfully.</strong>
-            </p>
-            {ddpiDetails.stamp_number ? (
-              <p style={{ marginBottom: "12px" }}>
-                Stamp Number: <strong>{ddpiDetails.stamp_number}</strong>
-              </p>
-            ) : null}
-            <p style={{ marginBottom: "16px" }}>
-              This stamp paper will be attached to your DDPI document for
-              eSign.
-            </p>
-            {ddpiLoading ? (
-              <p style={{ color: "#264095", marginBottom: 0 }}>
-                Loading assigned stamp paper...
-              </p>
-            ) : ddpiDetails.image_url ? (
-              <img
-                src={`${assetBaseUrl}${ddpiDetails.image_url}`}
-                alt={ddpiDetails.stamp_number || "Assigned stamp paper"}
-                onError={(e) => e.target.style.display = 'none'}
-                style={{
-                  width: "100%",
-                  maxWidth: "480px",
-                  borderRadius: "12px",
-                  border: "1px solid #d7defe",
-                  background: "#fff",
-                }}
-              />
-            ) : (
-              <p style={{ color: "#264095", marginBottom: 0 }}>
-                Stamp paper is assigned, but no preview image is available yet.
-              </p>
-            )}
-          </div>
-        ) : null}
+        {/* DDPI Stamp Paper Review Hidden for now */}
 
 
 
