@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 import phone from "../assets/phone.png";
@@ -28,17 +28,17 @@ const contactData = [
       "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
     timing: "Mon-Fri (9 AM to 6 PM, IST)",
   },
+  // {
+  //   tag: "3. Reach Out Head of Operations",
+  //   title: "Mr Kumar Mahlingam Iyer",
+  //   phone: "(+91) 8925808627",
+  //   email: "kumarmahlingam.iyer@aionioncapital.com",
+  //   address:
+  //     "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
+  //   timing: "Mon-Fri (9 AM to 6 PM, IST)",
+  // },
   {
-    tag: "3. Reach Out Head of Operations",
-    title: "Mr Kumar Mahlingam Iyer",
-    phone: "(+91) 8925808627",
-    email: "kumarmahlingam.iyer@aionioncapital.com",
-    address:
-      "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
-    timing: "Mon-Fri (9 AM to 6 PM, IST)",
-  },
-  {
-    tag: "4. Reach Out Director",
+    tag: "3. Reach Out Director",
     title: " Mr Anish Gupta",
     phone: "(+91) 8925808630",
     email: "compliance@aionioncapital.com",
@@ -111,6 +111,114 @@ const teambranch = [
   },
 ];
 
+const NAME_REGEX = /^[A-Za-z]+(?:[ .'-][A-Za-z]+)*\.?$/;
+const EMAIL_REGEX =
+  /^[A-Za-z0-9](?:[A-Za-z0-9._%+-]{0,62}[A-Za-z0-9])?@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
+const MOBILE_REGEX = /^[6-9]\d{9}$/;
+const URL_REGEX = /(https?:\/\/|www\.|\b[a-z0-9-]+\.(com|net|org|info|xyz|ru|cn|top|io|biz|link|click|site|online|shop)\b)/i;
+const HTML_REGEX = /<[^>]*>/;
+const EMAIL_IN_TEXT_REGEX = /[^\s@]+@[^\s@]+\.[^\s@]+/;
+const REPEATED_CHAR_REGEX = /(.)\1{5,}/;
+
+const DISPOSABLE_EMAIL_DOMAINS = [
+  "mailinator.com",
+  "tempmail.com",
+  "temp-mail.org",
+  "10minutemail.com",
+  "guerrillamail.com",
+  "guerrillamail.net",
+  "yopmail.com",
+  "throwawaymail.com",
+  "trashmail.com",
+  "getnada.com",
+  "sharklasers.com",
+  "dispostable.com",
+  "maildrop.cc",
+  "fakeinbox.com",
+  "mohmal.com",
+  "emailondeck.com",
+];
+
+const MESSAGE_MIN_LENGTH = 20;
+const MESSAGE_MAX_LENGTH = 1000;
+const MIN_FILL_TIME_MS = 4000;
+const SUBMIT_COOLDOWN_MS = 60 * 1000;
+const LAST_SUBMIT_KEY = "contact_last_submit_at";
+
+const validateField = (name, rawValue) => {
+  const value = (rawValue || "").trim();
+
+  switch (name) {
+    case "first_name":
+      if (!value) return "First name is required";
+      if (value.length < 2) return "First name must be at least 2 characters";
+      if (value.length > 50) return "First name must be under 50 characters";
+      if (!NAME_REGEX.test(value))
+        return "First name can contain only letters, spaces, dots and hyphens";
+      if (REPEATED_CHAR_REGEX.test(value)) return "Please enter a valid first name";
+      return "";
+
+    case "last_name":
+      if (!value) return "Last name is required";
+      if (value.length > 50) return "Last name must be under 50 characters";
+      if (!NAME_REGEX.test(value))
+        return "Last name can contain only letters, spaces, dots and hyphens";
+      if (REPEATED_CHAR_REGEX.test(value)) return "Please enter a valid last name";
+      return "";
+
+    case "email": {
+      if (!value) return "Email is required";
+      if (value.length > 100) return "Email must be under 100 characters";
+      if (!EMAIL_REGEX.test(value) || value.includes(".."))
+        return "Please enter a valid email address";
+      const domain = value.split("@")[1].toLowerCase();
+      if (DISPOSABLE_EMAIL_DOMAINS.includes(domain))
+        return "Temporary / disposable email addresses are not allowed";
+      return "";
+    }
+
+    case "phone_number":
+      if (!value) return "Phone number is required";
+      if (!MOBILE_REGEX.test(value))
+        return "Please enter a valid 10-digit mobile number";
+      if (/^(\d)\1{9}$/.test(value)) return "Please enter a valid mobile number";
+      return "";
+
+    case "message":
+      if (!value) return "Message is required";
+      if (value.length < MESSAGE_MIN_LENGTH)
+        return `Message must be at least ${MESSAGE_MIN_LENGTH} characters`;
+      if (value.length > MESSAGE_MAX_LENGTH)
+        return `Message must be under ${MESSAGE_MAX_LENGTH} characters`;
+      if (HTML_REGEX.test(value)) return "HTML tags are not allowed in the message";
+      if (URL_REGEX.test(value)) return "Links / URLs are not allowed in the message";
+      if (EMAIL_IN_TEXT_REGEX.test(value))
+        return "Please do not include email addresses in the message";
+      if (REPEATED_CHAR_REGEX.test(value)) return "Please enter a meaningful message";
+      if (!/[A-Za-z]{2,}/.test(value)) return "Please enter a meaningful message";
+      return "";
+
+    default:
+      return "";
+  }
+};
+
+const sanitizeInput = (name, value) => {
+  switch (name) {
+    case "first_name":
+    case "last_name":
+      return value.replace(/[^A-Za-z .'-]/g, "").replace(/\s{2,}/g, " ").slice(0, 50);
+    case "email":
+      return value.replace(/\s/g, "").slice(0, 100);
+    case "phone_number":
+      return value.replace(/\D/g, "").slice(0, 10);
+    case "message":
+      return value.slice(0, MESSAGE_MAX_LENGTH);
+    default:
+      return value;
+  }
+};
+
 const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -121,13 +229,16 @@ const Contact = () => {
     message: "",
   });
   const [errors, setErrors] = useState({});
+  // Honeypot field: hidden from humans, bots usually fill it
+  const [website, setWebsite] = useState("");
+  const formLoadedAt = useRef(Date.now());
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "phone_number" ? value.replace(/[^\d+\-\s()]/g, "") : value,
+      [name]: sanitizeInput(name, value),
     }));
 
     setErrors((prev) => ({
@@ -137,41 +248,68 @@ const Contact = () => {
     }));
   };
 
+  const handleBlur = (event) => {
+    const { name, value } = event.target;
+    if (!value) return;
+    setErrors((prev) => ({
+      ...prev,
+      [name]: validateField(name, value),
+    }));
+  };
+
   const validateForm = () => {
     const nextErrors = {};
 
-    if (!formData.first_name.trim()) {
-      nextErrors.first_name = "First name is required";
-    }
-
-    if (!formData.last_name.trim()) {
-      nextErrors.last_name = "Last name is required";
-    }
-
-    if (!formData.email.trim()) {
-      nextErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      nextErrors.email = "Please enter a valid email address";
-    }
-
-    if (!formData.phone_number.trim()) {
-      nextErrors.phone_number = "Phone number is required";
-    } else if (!/^[0-9+\-\s()]{7,20}$/.test(formData.phone_number.trim())) {
-      nextErrors.phone_number = "Please enter a valid phone number";
-    }
-
-    if (!formData.message.trim()) {
-      nextErrors.message = "Message is required";
-    }
+    Object.keys(formData).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) nextErrors[field] = error;
+    });
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
+  };
+
+  const resetForm = () => {
+    setFormData({
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      message: "",
+    });
+    setWebsite("");
+    formLoadedAt.current = Date.now();
+  };
+
+  const getLastSubmitAt = () => {
+    try {
+      return Number(localStorage.getItem(LAST_SUBMIT_KEY)) || 0;
+    } catch {
+      return 0;
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!validateForm()) {
+      return;
+    }
+
+    // Bot checks: honeypot filled or form submitted too quickly.
+    // Pretend success so bots don't learn they were blocked.
+    if (website || Date.now() - formLoadedAt.current < MIN_FILL_TIME_MS) {
+      toast.success("Your enquiry has been submitted successfully");
+      resetForm();
+      return;
+    }
+
+    const sinceLastSubmit = Date.now() - getLastSubmitAt();
+    if (sinceLastSubmit < SUBMIT_COOLDOWN_MS) {
+      const waitSeconds = Math.ceil((SUBMIT_COOLDOWN_MS - sinceLastSubmit) / 1000);
+      setErrors({
+        general: `Please wait ${waitSeconds} seconds before sending another message`,
+      });
       return;
     }
 
@@ -192,13 +330,12 @@ const Contact = () => {
         response?.data?.message || "Your enquiry has been submitted successfully";
 
       toast.success(responseMessage);
-      setFormData({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
-        message: "",
-      });
+      try {
+        localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
+      } catch {
+        // ignore storage errors
+      }
+      resetForm();
     } catch (error) {
       const message =
         error.response?.data?.message ||
@@ -246,7 +383,30 @@ const Contact = () => {
 
           <div className='col-lg-8 contact-card-right'>
             <div className='contact-container'>
-              <form className='contact-form' onSubmit={handleSubmit}>
+              <form className='contact-form' onSubmit={handleSubmit} noValidate>
+                {/* Honeypot - hidden from real users */}
+                <div
+                  aria-hidden='true'
+                  style={{
+                    position: "absolute",
+                    left: "-10000px",
+                    width: "1px",
+                    height: "1px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <label htmlFor='contact_website'>Website</label>
+                  <input
+                    id='contact_website'
+                    type='text'
+                    name='website'
+                    tabIndex={-1}
+                    autoComplete='off'
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </div>
+
                 <div className='form-row'>
                   <div className='form-group'>
                     <label>First Name</label>
@@ -255,6 +415,9 @@ const Contact = () => {
                       name='first_name'
                       value={formData.first_name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      maxLength={50}
+                      autoComplete='given-name'
                     />
                     {errors.first_name && (
                       <p className='error-text'>{errors.first_name}</p>
@@ -268,6 +431,9 @@ const Contact = () => {
                       name='last_name'
                       value={formData.last_name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      maxLength={50}
+                      autoComplete='family-name'
                     />
                     {errors.last_name && (
                       <p className='error-text'>{errors.last_name}</p>
@@ -283,6 +449,9 @@ const Contact = () => {
                       name='email'
                       value={formData.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      maxLength={100}
+                      autoComplete='email'
                     />
                     {errors.email && <p className='error-text'>{errors.email}</p>}
                   </div>
@@ -294,6 +463,10 @@ const Contact = () => {
                       name='phone_number'
                       value={formData.phone_number}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      inputMode='numeric'
+                      maxLength={10}
+                      autoComplete='tel-national'
                     />
                     {errors.phone_number && (
                       <p className='error-text'>{errors.phone_number}</p>
@@ -308,7 +481,12 @@ const Contact = () => {
                     placeholder='Write your message..'
                     value={formData.message}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    maxLength={MESSAGE_MAX_LENGTH}
                   />
+                  <small style={{ alignSelf: "flex-end", color: "#888" }}>
+                    {formData.message.trim().length}/{MESSAGE_MAX_LENGTH}
+                  </small>
                   {errors.message && <p className='error-text'>{errors.message}</p>}
                 </div>
 
