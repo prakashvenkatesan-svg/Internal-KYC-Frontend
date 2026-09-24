@@ -2,7 +2,8 @@ const rekycLinks = [
   {
     label: "General ReKYC",
     description: "Update your KYC details.",
-    href: "https://rekyc.meon.co.in/v1/company/aionioncapital/modification/login",
+    // href: "https://rekyc.meon.co.in/v1/company/aionioncapital/modification/login",
+    href: "https://rmkyc.aionioncapital.com/rekyc/login",
   },
   {
     label: "Bank Modifications Only",
