@@ -220,17 +220,17 @@ const contactData = [
       "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
     timing: "Mon-Fri (9 AM to 6 PM, IST)",
   },
+  // {
+  //   tag: "3. Reach Out Head of Operations",
+  //   title: "Mr Kumar Mahlingam Iyer",
+  //   phone: "(+91) 8925808627",
+  //   email: "kumarmahlingam.iyer@aionioncapital.com",
+  //   address:
+  //     "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
+  //   timing: "Mon-Fri (9 AM to 6 PM, IST)",
+  // },
   {
-    tag: "3. Reach Out Head of Operations",
-    title: "Mr Kumar Mahlingam Iyer",
-    phone: "(+91) 8925808627",
-    email: "kumarmahlingam.iyer@aionioncapital.com",
-    address:
-      "3rd Floor, Meerlan Towers, No. 33 Hanumantha Road, Royapettah, Chennai - 600014",
-    timing: "Mon-Fri (9 AM to 6 PM, IST)",
-  },
-  {
-    tag: "4. Reach Out Director",
+    tag: "3. Reach Out Director",
     title: " Mr Anish Gupta",
     phone: "(+91) 8925808630",
     email: "compliance@aionioncapital.com",
