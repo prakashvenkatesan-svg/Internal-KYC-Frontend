@@ -306,30 +306,21 @@ const Investor = () => {
         <h2 className='text-center'>Investor Support</h2>
 
         <div className='d-flex Investor-header'>
-          <div className='dropdown'>
+         
             <button
-              type='button'
-              className='investor-btn dropdown-toggle'
-              data-bs-toggle='dropdown'
-              aria-expanded='false'
-            >
-              ReKYC
-            </button>
-            <ul className='dropdown-menu rekyc-dropdown-menu'>
-              {rekycLinks.map((item) => (
-                <li key={item.label}>
-                  <a
-                    className='dropdown-item rekyc-dropdown-item'
-                    href={item.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            type='button'
+            className='investor-btn'
+            onClick={() => {
+              window.open(
+                "https://rmkyc.aionioncapital.com/rekyc/login",
+                "_blank",
+                "noopener,noreferrer",
+              );
+            }}
+          >
+            ReKYC
+          </button>
+          
 
           <button
             type='button'
