@@ -1,5 +1,3 @@
-import { useNavigate, useLocation } from "react-router-dom";
-
 import openacctoday from "../assets/openacctoday.png";
 import chooseaionion from "../assets/chooseaionion.png";
 
@@ -16,8 +14,6 @@ import kycstep from "../assets/kycstep.png";
 import kycstepsmobileview from "../assets/kycstepsmobileview.png";
 
 const Openaccount = () => {
-  const navigate = useNavigate();
-
   return (
     <div>
       <div className='openaccount-header'>
@@ -41,7 +37,7 @@ const Openaccount = () => {
                 type='button'
                 className='openaccountbtn'
                 onClick={() => {
-                  navigate("/numberregistration");
+                  window.location.assign("https://kyc.aionioncapital.com");
                 }}
               >
                 Open your Account Today

@@ -156,7 +156,7 @@ const Navbar = () => {
                     type='button'
                     className='Registerbtn'
                     onClick={() => {
-                      navigate("/numberregistration");
+                      window.location.assign("https://kyc.aionioncapital.com");
                       closeMenu();
                     }}
                   >
