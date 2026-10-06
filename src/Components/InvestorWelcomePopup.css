@@ -8,7 +8,7 @@
 .investor-welcome-languages button[aria-pressed='true'] { background: white; color: #3424ff; box-shadow: 0 2px 6px #36407724; }
 .investor-welcome-presenter { display: flex; align-items: baseline; gap: 5px; margin: 0; line-height: 1.2; color: #333b60; font-size: 12px; font-weight: 500; }
 .investor-welcome-presenter span { font-size: 15px; font-style: italic; font-weight: 600; letter-spacing: -1px; text-decoration: underline; text-underline-offset: 2px; }
-.investor-welcome-dialog h2 { position: relative; z-index: 1; margin: 0 0 24px; font-size: clamp(32px, 7vw, 55px); line-height: 1.1; letter-spacing: -2px; font-weight: 700; color: #333b60; }
+.investor-welcome-dialog h2 { position: relative; z-index: 1; margin: 0 0 24px; padding-top: 0; font-size: clamp(32px, 7vw, 55px); line-height: 1.1; letter-spacing: -2px; font-weight: 700; color: #333b60; }
 .investor-welcome-blue { color: #3524ff; }
 .investor-welcome-gradient { background: linear-gradient(100deg, #ff557b, #a82bac); background-clip: text; -webkit-text-fill-color: transparent; }
 .investor-welcome-growth { position: absolute; z-index: -1; width: 265px; right: 0; bottom: 120px; pointer-events: none; }
