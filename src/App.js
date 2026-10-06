@@ -10,6 +10,7 @@ import ScrollToTop from "./Components/ScrollToTop";
 import LoginForm from "./Components/LoginForm";
 import TradingLoginRedirect from "./Components/TradingLoginRedirect";
 import LegacyRedirect from "./Components/LegacyRedirect";
+import InvestorWelcomePopup from "./Components/InvestorWelcomePopup";
 
 //PAGES
 import Home from "./Pages/Home";
@@ -127,6 +128,7 @@ const Layout = () => {
 
   return (
     <>
+      {!location.pathname.startsWith("/admin") && <InvestorWelcomePopup />}
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

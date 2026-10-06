@@ -1,0 +1,21 @@
+﻿.investor-welcome-overlay { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(23, 28, 62, .58); backdrop-filter: blur(6px); }
+.investor-welcome-dialog { position: relative; isolation: isolate; width: 656px; max-width: 100%; max-height: calc(100dvh - 48px); overflow-y: auto; padding: 32px 40px 20px; border-radius: 24px; color: #323b61; font-family: 'Poppins', sans-serif; background: radial-gradient(ellipse at 88% 2%, #fbd5e6 0, transparent 31%), radial-gradient(ellipse at 8% 100%, #d6dfff 0, transparent 43%), linear-gradient(125deg, #fff 20%, #f7f9ff 70%, #fff0f5); box-shadow: 0 24px 90px #11163855; }
+.investor-welcome-close { position: absolute; right: 17px; top: 17px; border: 0; background: transparent; color: #344168; display: grid; place-items: center; width: 34px; height: 34px; font-size: 26px; cursor: pointer; }
+.investor-welcome-logo { display: block; width: 185px; height: 64px; object-fit: contain; object-position: left center; }
+.investor-welcome-languages { display: flex; width: fit-content; margin: 4px -20px 0 auto; border-radius: 15px; background: #e8ebf8; padding: 3px; }
+.investor-welcome-languages button { border: 0; background: transparent; border-radius: 12px; padding: 8px 17px; font-size: 15px; font-weight: 600; color: #3c466d; cursor: pointer; }
+.investor-welcome-languages button[aria-pressed='true'] { background: white; color: #3424ff; box-shadow: 0 2px 6px #36407724; }
+.investor-welcome-dialog h2 { position: relative; z-index: 1; margin: -9px 0 24px; font-size: clamp(32px, 7vw, 55px); line-height: 1.1; letter-spacing: -2px; font-weight: 700; color: #333b60; }
+.investor-welcome-blue { color: #3524ff; }
+.investor-welcome-gradient { background: linear-gradient(100deg, #ff557b, #a82bac); background-clip: text; -webkit-text-fill-color: transparent; }
+.investor-welcome-growth { position: absolute; z-index: -1; width: 265px; right: 0; bottom: 120px; pointer-events: none; }
+.investor-welcome-points { position: relative; list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 10px; }
+.investor-welcome-points li { display: flex; align-items: center; gap: 19px; font-size: 16px; font-weight: 400; min-height: 40px; }
+.investor-welcome-icon { flex: 0 0 43px; width: 43px; height: 43px; border-radius: 50%; display: grid; place-items: center; background: #e9efff; color: #4273ff; font-size: 23px; }
+.investor-welcome-icon-1, .investor-welcome-icon-3 { background: #ffe8f0; color: #ff5286; }
+.investor-welcome-confirm { position: relative; width: 100%; border: 0; border-radius: 40px; padding: 14px 24px; background: linear-gradient(105deg, #3022ff 0%, #4530de 40%, #ff5d7f 100%); color: white; font-size: 25px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 18px; cursor: pointer; box-shadow: 0 6px 12px #443bdb25; }
+.investor-welcome-confirm:hover { filter: brightness(1.06); }
+.investor-welcome-footer { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 13px; color: #7179ad; margin: 16px 0 0; }
+.investor-welcome-footer > span { display: grid; place-items: center; width: 21px; height: 23px; flex-shrink: 0; color: white; background: #9982ff; clip-path: polygon(50% 0, 95% 17%, 90% 65%, 50% 100%, 10% 65%, 5% 17%); }
+.investor-welcome-dialog button:focus-visible { outline: 3px solid #2635ef; outline-offset: 3px; }
+@media (max-width: 540px) { .investor-welcome-overlay { padding: 14px; } .investor-welcome-dialog { padding: 28px 22px 20px; max-height: calc(100dvh - 28px); border-radius: 20px; } .investor-welcome-logo { width: 155px; height: 58px; } .investor-welcome-languages { margin: 12px 0 18px auto; } .investor-welcome-dialog h2 { margin-top: 0; letter-spacing: -1px; font-size: clamp(30px, 8.2vw, 43px); } .investor-welcome-points li { font-size: 13px; gap: 12px; } .investor-welcome-icon { flex-basis: 36px; width: 36px; height: 36px; font-size: 20px; } .investor-welcome-growth { width: 180px; bottom: 115px; opacity: .45; } .investor-welcome-confirm { font-size: 21px; } .investor-welcome-footer { font-size: 10px; } }
