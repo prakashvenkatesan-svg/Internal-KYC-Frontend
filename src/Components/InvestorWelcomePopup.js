@@ -1,10 +1,9 @@
-﻿import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { FiBookOpen, FiShield, FiBarChart2, FiAlertTriangle, FiArrowRight, FiX, FiCheck } from "react-icons/fi";
 import logo from "../assets/Aionionlogo.png";
 import "./InvestorWelcomePopup.css";
 
-const dismissalKey = "aionion-investor-awareness-dismissed";
 const messages = {
   en: { points: ["Understand before you Invest", "Choose regulated Investment products", "Start early, Stay invested", "Beware of Investment frauds"], button: "Got it", footer: "Investor Awareness Month initiative by SEBI", close: "Close investor awareness notification" },
   hi: { points: ["निवेश करने से पहले समझें", "विनियमित निवेश उत्पाद चुनें", "जल्दी शुरू करें, निवेश बनाए रखें", "निवेश धोखाधड़ी से सावधान रहें"], button: "समझ गया", footer: "सेबी की निवेशक जागरूकता माह पहल", close: "निवेशक जागरूकता सूचना बंद करें" }
@@ -27,11 +26,11 @@ function GrowthIllustration() {
 }
 
 export default function InvestorWelcomePopup() {
-  const [open, setOpen] = useState(() => { try { return sessionStorage.getItem(dismissalKey) !== "true"; } catch { return true; } });
+  const [open, setOpen] = useState(true);
   const [language, setLanguage] = useState("en");
   const dialogRef = useRef(null);
   const copy = messages[language];
-  const dismiss = () => { try { sessionStorage.setItem(dismissalKey, "true"); } catch { /* Dismiss still works when storage is unavailable. */ } setOpen(false); };
+  const dismiss = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return;
