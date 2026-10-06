@@ -37,14 +37,14 @@ export default function InvestorWelcomePopup() {
     const previousFocus = document.activeElement;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    dialogRef.current?.querySelector("button")?.focus();
+    dialogRef.current?.focus();
     const onKeyDown = (event) => {
       if (event.key === "Escape") { event.preventDefault(); dismiss(); }
       if (event.key === "Tab") {
         const buttons = dialogRef.current.querySelectorAll("button");
         const first = buttons[0];
         const last = buttons[buttons.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) { event.preventDefault(); last.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       }
     };
@@ -54,13 +54,14 @@ export default function InvestorWelcomePopup() {
 
   if (!open) return null;
   return createPortal(<div className="investor-welcome-overlay">
-    <section ref={dialogRef} className="investor-welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="investor-welcome-title" aria-describedby="investor-welcome-points" lang={language}>
+    <section ref={dialogRef} className="investor-welcome-dialog" tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="investor-welcome-title" aria-describedby="investor-welcome-points" lang={language}>
       <button className="investor-welcome-close" onClick={dismiss} aria-label={copy.close}><FiX /></button>
       <img className="investor-welcome-logo" src={logo} alt="Aionion Capital" />
       <div className="investor-welcome-languages" role="group" aria-label="Notification language">
         <button onClick={() => setLanguage("en")} aria-pressed={language === "en"}>English</button>
         <button onClick={() => setLanguage("hi")} aria-pressed={language === "hi"}>हिंदी</button>
       </div>
+      <p className="investor-welcome-presenter"><span>SEBI</span> presents</p>
       <h2 id="investor-welcome-title">{language === "en" ? <><span className="investor-welcome-blue">Samajh</span> se<br/><span className="investor-welcome-gradient">Investing</span> simple</> : <><span className="investor-welcome-blue">समझ</span> से<br/><span className="investor-welcome-gradient">निवेश</span> आसान</>}</h2>
       <GrowthIllustration />
       <ul id="investor-welcome-points" className="investor-welcome-points">{copy.points.map((point, index) => { const Icon = icons[index]; return <li key={index}><span className={`investor-welcome-icon investor-welcome-icon-${index}`}><Icon /></span><span>{point}</span></li>; })}</ul>
