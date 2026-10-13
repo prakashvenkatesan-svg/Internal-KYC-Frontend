@@ -208,7 +208,6 @@ const More = () => {
         {activeSection === "Refund" && (
           <>
             <h3>Refund Cancellation</h3>
-            <h4>REFUND & CANCELLATION POLICY</h4>
             <h4>1.Refund Eligibility</h4>
             <p>
               Clients may request a refund for payments made towards account
@@ -240,7 +239,7 @@ const More = () => {
             </p>
             <p>
               For refund or cancellation-related assistance, 
-              contact: Email:clientcare@aionioncapital.com
+              <strong>Contact Email:clientcare@aionioncapital.com</strong>
             </p>
           </>
         )}
