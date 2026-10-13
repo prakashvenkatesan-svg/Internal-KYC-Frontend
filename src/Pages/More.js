@@ -20,14 +20,15 @@ const More = () => {
   }, [location]);
 
   return (
-    <div className='container'>
-      <h2 className='text-center More-heading'>More</h2>
-      <div className='More-header'>
+    <div className="container">
+      <h2 className="text-center More-heading">More</h2>
+      <div className="More-header">
         <div>
           <button
-            type='button'
-            className={`more-btn ${activeSection === "Awareness and Advisory" ? "active" : ""
-              }`}
+            type="button"
+            className={`more-btn ${
+              activeSection === "Awareness and Advisory" ? "active" : ""
+            }`}
             onClick={() => setActiveSection("Awareness and Advisory")}
           >
             Investor Awareness and Advisory
@@ -36,7 +37,7 @@ const More = () => {
 
         <div>
           <button
-            type='button'
+            type="button"
             className={`more-btn ${activeSection === "Disclaimers" ? "active" : ""}`}
             onClick={() => setActiveSection("Disclaimers")}
           >
@@ -46,7 +47,7 @@ const More = () => {
 
         <div>
           <button
-            type='button'
+            type="button"
             className={`more-btn ${activeSection === "Refund" ? "active" : ""}`}
             onClick={() => setActiveSection("Refund")}
           >
@@ -56,7 +57,7 @@ const More = () => {
 
         <div>
           <button
-            type='button'
+            type="button"
             className={`more-btn ${activeSection === "Terms" ? "active" : ""}`}
             onClick={() => setActiveSection("Terms")}
           >
@@ -66,7 +67,7 @@ const More = () => {
 
         <div>
           <button
-            type='button'
+            type="button"
             className={`more-btn ${activeSection === "bond" ? "active" : ""}`}
             onClick={() => setActiveSection("bond")}
           >
@@ -75,7 +76,7 @@ const More = () => {
         </div>
       </div>
 
-      <div className='More-card'>
+      <div className="More-card">
         {activeSection === "Awareness and Advisory" && (
           <>
             <h3>Investor Awareness and Advisory</h3>
@@ -208,41 +209,38 @@ const More = () => {
           <>
             <h3>Refund Cancellation</h3>
             <h4>REFUND & CANCELLATION POLICY</h4>
-            <h4>1.Non-Refundable Charges</h4>
+            <h4>1.Refund Eligibility</h4>
             <p>
-              There are risks associated with investing in securities. Investing
-              in stocks, bonds, exchange traded funds, mutual funds, and money
-              market funds involve risk of loss. Loss of principal is possible.
-              Some high risk investments may use leverage, which will accentuate
-              gains and losses. Foreign investing involves special risks,
-              including a greater volatility and political, economic and
-              currency risks and differences in accounting methods. A security's
-              or a firm's past investment is not a guarantee or predictor of
-              future investment performance.
-            </p>
-            <p>
-              The collection of documents required for the account opening
-              process is subject to the availability of representatives at the
-              specific time and location agreed upon.
+              Clients may request a refund for payments made towards account
+              opening or related services if the service has not been completed,
+              the account has not been activated, or the payment was made in
+              error. Refund requests will be verified based on the payment
+              details and the status of the account-opening or service request.
             </p>
             <h4>2.Duplicate Payments</h4>
             <p>
-              If payments related to account opening have been made multiple
-              times in error, clients are advised to write to
-              clientcare@aionioncapital.com. Upon verification, Aionion Capital
-              will initiate the necessary process to refund the excess amount.
+              If a client makes the same payment more than once, the duplicate
+              or excess payment will be refunded after verification.
             </p>
-            <h4>3.Refund Processing</h4>
+            <h4>3.Cancellation</h4>
             <p>
-              Any refund process, where applicable, is subject to the procedures
-              and timelines of third-party entities, such as banks and payment
-              gateways, involved in the transaction. Completion of the refund
-              process depends on these external agencies.
+              Clients may request cancellation of an account-opening or service
+              request before completion or activation. Cancellation requests
+              will be verified and processed based on the current status of the
+              application or service.
+            </p>
+            <h4>4.Refund Timeline</h4>
+            <p>
+              Once a refund is approved, Aionion Capital will initiate the
+              refund within 5–7 working days. The refunded amount will be
+              processed to the same payment method used for the original
+              transaction, wherever applicable. The actual credit time may vary
+              depending on the customer’s bank, card issuer, UPI provider, or
+              payment gateway.
             </p>
             <p>
-              Note: While Aionion Capital will make every effort to process
-              refunds promptly, delays caused by banks, payment gateways, or
-              other third-party agencies are beyond our control.
+              For refund or cancellation-related assistance, 
+              contact: Email:clientcare@aionioncapital.com
             </p>
           </>
         )}
@@ -290,8 +288,8 @@ const More = () => {
               will not be accepted.
             </p>
 
-            <p className='more-table-content'>Below 2 Lakhs</p>
-            <table className='responsive-table'>
+            <p className="more-table-content">Below 2 Lakhs</p>
+            <table className="responsive-table">
               <thead>
                 <tr>
                   <th>Account Number</th>
@@ -305,21 +303,20 @@ const More = () => {
 
               <tbody>
                 <tr>
-                  <td data-label='Account Number'>57500001086245</td>
-                  <td data-label='Beneficery name'>
+                  <td data-label="Account Number">57500001086245</td>
+                  <td data-label="Beneficery name">
                     Indian Clearing Corporation Limited
                   </td>
-                  <td data-label='IFSC Code'>HDFC0000060</td>
-                  <td data-label='Branch Name'>HDFC Bank Ltd, Fort Branch</td>
-                  <td data-label='Mode of Transfer'>NEFT Only</td>
-                  <td data-label='ICCL LEI Number'>-</td>
-
+                  <td data-label="IFSC Code">HDFC0000060</td>
+                  <td data-label="Branch Name">HDFC Bank Ltd, Fort Branch</td>
+                  <td data-label="Mode of Transfer">NEFT Only</td>
+                  <td data-label="ICCL LEI Number">-</td>
                 </tr>
               </tbody>
             </table>
 
-            <p className='more-table-content'>2 Lakhs and Above</p>
-            <table className='responsive-table'>
+            <p className="more-table-content">2 Lakhs and Above</p>
+            <table className="responsive-table">
               <thead>
                 <tr>
                   <th>Account Number</th>
@@ -333,15 +330,14 @@ const More = () => {
 
               <tbody>
                 <tr>
-                  <td data-label='Account Number'>8715962</td>
-                  <td data-label='Beneficery name'>
+                  <td data-label="Account Number">8715962</td>
+                  <td data-label="Beneficery name">
                     Indian Clearing Corporation Limited
                   </td>
-                  <td data-label='IFSC Code'>ICLL0000001</td>
-                  <td data-label='Branch Name'>RBI Fort</td>
-                  <td data-label='Mode of Transfer'>RTGS Only</td>
-                  <td data-label='ICCL LEI Number'>335800EV4FPEFRWNVX08</td>
-
+                  <td data-label="IFSC Code">ICLL0000001</td>
+                  <td data-label="Branch Name">RBI Fort</td>
+                  <td data-label="Mode of Transfer">RTGS Only</td>
+                  <td data-label="ICCL LEI Number">335800EV4FPEFRWNVX08</td>
                 </tr>
               </tbody>
             </table>
