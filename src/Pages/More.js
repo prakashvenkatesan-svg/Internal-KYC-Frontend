@@ -238,7 +238,7 @@ const More = () => {
               payment gateway.
             </p>
             <p>
-              For refund or cancellation-related assistance, 
+              For refund or cancellation-related assistance,<br />
               <strong>Contact Email:clientcare@aionioncapital.com</strong>
             </p>
           </>
