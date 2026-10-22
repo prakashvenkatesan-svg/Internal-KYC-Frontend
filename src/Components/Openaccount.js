@@ -37,7 +37,7 @@ const Openaccount = () => {
                 type='button'
                 className='openaccountbtn'
                 onClick={() => {
-                  window.location.assign("https://kyc.aionioncapital.com");
+                  window.location.assign("https://live.meon.co.in/aionion/individual_new");
                 }}
               >
                 Open your Account Today

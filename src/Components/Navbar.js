@@ -156,7 +156,7 @@ const Navbar = () => {
                     type='button'
                     className='Registerbtn'
                     onClick={() => {
-                      window.location.assign("https://kyc.aionioncapital.com");
+                      window.location.assign("https://live.meon.co.in/aionion/individual_new");
                       closeMenu();
                     }}
                   >
