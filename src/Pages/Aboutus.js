@@ -340,6 +340,11 @@ const Aboutus = () => {
                 </div>
 
                 <div>
+                  <p className='label'>Investment Adviser SEBI Registration Number</p>
+                  <p className='value'>INA000023579</p>
+                </div>
+
+                <div>
                   <p className='label'>
                     SEBI DP Registration no
                   </p>

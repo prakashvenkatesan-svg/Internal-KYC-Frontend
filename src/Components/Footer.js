@@ -315,6 +315,9 @@ const Footer = () => {
               <p className='p-tag'>
                 Research Analyst SEBI Registration Number: INH000020138
               </p>
+              <p className='p-tag'>
+                Investment Adviser SEBI Registration Number: INA000023579
+              </p>
             </div>
           </div>
         </div>
